@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendoora Dashboard - Online Store Management</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Brand Colors from index.css */
+            --primary: #00A5A8;
+            --primary-light: #00c4c7;
+            --secondary: #FF6B6B;
+            --secondary-light: #ff8e8e;
+            --accent: #9A7EE6;
+            --neutral-light: #F7F7F7;
+            --neutral-dark: #2D3436;
+            --white: #FFFFFF;
+            --grey: #E0E0E0;
+            --pink: #d32b84;
+            --orange: #FFA500;
+            --gradient-pink-orange: linear-gradient(to right, #d32b84, #FFA500);
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --radius: 12px;
+            --clothing-gradient: linear-gradient(135deg, #FF9A9E 0%, #FAD0C4 100%);
+            --footwear-gradient: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);
+            --cafe-gradient: linear-gradient(135deg, #C6FFDD 0%, #fbd786 50%, #f7797d 100%);
+            --online-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f9f9 0%, #e0f4f4 100%);
+            min-height: 100vh;
+            color: var(--neutral-dark);
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Settings Dropdown */
+        .settings-dropdown {
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gradient-pink-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .user-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow);
+        }
+
+        .settings-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--white);
+            min-width: 200px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            padding: 0.5rem 0;
+            z-index: 1000;
+            margin-top: 10px;
+        }
+
+        .settings-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .settings-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            text-decoration: none;
+            color: var(--neutral-dark);
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .settings-option:hover {
+            background: var(--neutral-light);
+            color: var(--primary);
+        }
+
+        .settings-option.logout {
+            color: var(--secondary);
+        }
+
+        .settings-option.logout:hover {
+            background: var(--secondary-light);
+            color: var(--white);
+        }
+
+        .settings-divider {
+            border: none;
+            height: 1px;
+            background: var(--grey);
+            margin: 0.5rem 0;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .page-title p {
+            color: #666;
+            font-size: 1.1rem;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .store-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .store-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .store-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-pink-orange);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+
+        .store-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--grey);
+        }
+
+        .card-header h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--neutral-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-header p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .card-image {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(0, 165, 168, 0.1) 0%, 
+                rgba(154, 126, 230, 0.1) 50%, 
+                rgba(255, 107, 107, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .store-card:hover .card-image::before {
+            opacity: 1;
+        }
+
+        .theme-icon {
+            font-size: 4rem;
+            color: var(--white);
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .store-card:hover .theme-icon {
+            transform: scale(1.1);
+        }
+
+        .card-footer {
+            padding: 1.5rem;
+        }
+
+        .store-btn {
+            width: 100%;
+            background: var(--gradient-pink-orange);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .store-btn:hover {
+            background: linear-gradient(to right, #e83d96, #FFB732);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(211, 43, 132, 0.3);
+        }
+
+        .store-btn i {
+            transition: transform 0.3s ease;
+        }
+
+        .store-btn:hover i {
+            transform: translateX(3px);
+        }
+
+.theme-preview img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+
+        /* Theme Modal */
+        .theme-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .theme-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+        }
+
+        .theme-modal-content {
+            background: var(--white);
+            border-radius: var(--radius);
+            max-width: 900px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+
+        .theme-modal.active .theme-modal-content {
+            transform: scale(1);
+        }
+
+        .theme-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            border-bottom: 1px solid var(--grey);
+        }
+
+        .theme-modal-header h2 {
+            margin: 0;
+            color: var(--neutral-dark);
+            font-size: 1.8rem;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--neutral-dark);
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            background: var(--grey);
+            color: var(--secondary);
+        }
+
+        .theme-modal-body {
+            padding: 2rem;
+        }
+
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .theme-option {
+            background: var(--neutral-light);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .theme-option:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .theme-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--gradient-pink-orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: var(--white);
+            font-size: 2rem;
+        }
+
+        .theme-option h4 {
+            margin-bottom: 0.5rem;
+            color: var(--neutral-dark);
+            font-size: 1.2rem;
+        }
+
+        .theme-option p {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            min-height: 60px;
+        }
+
+        .theme-price {
+            display: block;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .theme-price small {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .select-theme-btn {
+            background: var(--gradient-pink-orange);
+            color: var(--white);
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .select-theme-btn:hover {
+            background: linear-gradient(to right, #e83d96, #FFB732);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Theme specific backgrounds */
+        .online-theme .card-image {
+            background: var(--online-gradient);
+        }
+        
+        .clothing-theme .card-image {
+            background: var(--clothing-gradient);
+        }
+        
+        .footwear-theme .card-image {
+            background: var(--footwear-gradient);
+        }
+        
+        .cafe-theme .card-image {
+            background: var(--cafe-gradient);
+        }
+
+        /* Responsive updates */
+        @media (max-width: 768px) {
+            .theme-modal-content {
+                width: 95%;
+                margin: 1rem;
+            }
+
+            .theme-modal-header,
+            .theme-modal-body {
+                padding: 1rem;
+            }
+
+            .themes-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .theme-option {
+                padding: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .action-btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title h1 {
+                font-size: 1.8rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .user-info {
+                gap: 0.5rem;
+            }
+
+            .welcome-text {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            animation: fadeIn 0.5s ease 0.2s forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <img src="image/log.png" alt="Vendoora Logo" style="height: 45px; width: auto;">
+            </a>
+            <div class="user-info">
+                <div class="settings-dropdown">
+                    <div class="user-avatar" onclick="toggleSettings()">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <div class="settings-menu" id="settingsMenu">
+                        <a href="#" class="settings-option">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                        <a href="#" class="settings-option">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                        <a href="#" class="settings-option">
+                            <i class="fas fa-question-circle"></i>
+                            Help
+                        </a>
+                        <hr class="settings-divider">
+                        <a href="#" class="settings-option logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Page Title -->
+        <div class="page-title">
+            <h1>Online Business</h1>
+            <p>Choose your store theme and start selling online today</p>
+        </div>
+
+        <!-- Store Cards Grid --><!-- Store Cards Grid -->
+    <div class="cards-grid">
+        <!-- Online Store Theme -->
+        <div class="store-card loading online-theme">
+            <div class="card-header">
+                <h3>Online Store</h3>
+                <p>Versatile theme for any online business</p>
+            </div>
+            <div class="card-image">
+                <img src="image/Online Store.PNG" alt="Online Store" />
+            </div>
+            <div class="card-footer">
+                <a href="#" class="store-btn" onclick="showThemeDetails('online')">
+                    View Theme
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Clothing Store Theme -->
+        <div class="store-card loading clothing-theme">
+            <div class="card-header">
+                <h3>Clothing Store</h3>
+                <p>Fashion-focused design for apparel</p>
+            </div>
+            <div class="card-image">
+                <img src="image/Clothing Store.PNG" alt="Clothing Store" />
+            </div>
+            <div class="card-footer">
+                <a href="#" class="store-btn" onclick="showThemeDetails('clothing')">
+                    View Theme
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Premium Footwear Theme -->
+        <div class="store-card loading footwear-theme">
+            <div class="card-header">
+                <h3>Premium Footwear</h3>
+                <p>Elegant design for shoe stores</p>
+            </div>
+            <div class="card-image">
+                <img src="image/Premium Footwear Store.PNG" alt="Footwear Store" />
+            </div>
+            <div class="card-footer">
+                <a href="#" class="store-btn" onclick="showThemeDetails('footwear')">
+                    View Theme
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Cafe & Organic Theme -->
+        <div class="store-card loading cafe-theme">
+            <div class="card-header">
+                <h3>Cafe & Organic Foods</h3>
+                <p>Warm design for cafes and organic shops</p>
+            </div>
+            <div class="card-image">
+                <img src="image/Art & Prints Store.PNG" alt="Cafe & Organic" />
+            </div>
+            <div class="card-footer">
+                <a href="#" class="store-btn" onclick="showThemeDetails('cafe')">
+                    View Theme
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Modal -->
+    <div class="theme-modal" id="themeModal">
+        <div class="theme-modal-content">
+            <div class="theme-modal-header">
+                <h2 id="themeModalTitle">Choose Your Store Theme</h2>
+                <button class="close-modal" onclick="closeThemeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="theme-modal-body">
+                <div class="themes-grid" id="themeDetails">
+                    <!-- Theme details will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        // Settings dropdown functionality
+        function toggleSettings() {
+            const settingsMenu = document.getElementById('settingsMenu');
+            settingsMenu.classList.toggle('active');
+        }
+
+        // Close settings dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const settingsDropdown = document.querySelector('.settings-dropdown');
+            const settingsMenu = document.getElementById('settingsMenu');
+            
+            if (!settingsDropdown.contains(event.target)) {
+                settingsMenu.classList.remove('active');
+            }
+        });
+
+        // Theme modal functionality
+        function showThemeDetails(theme) {
+            const modal = document.getElementById('themeModal');
+            const title = document.getElementById('themeModalTitle');
+            const details = document.getElementById('themeDetails');
+            
+            // Set modal title based on theme
+            if (theme === 'online') {
+                title.textContent = 'Online Store Theme';
+                details.innerHTML = `
+    <div class="theme-option">
+        <div class="theme-preview">
+            <img src="image/Online Store.PNG" alt="Online Store Preview" />
+        </div>
+        <h4>Online Store</h4>
+        <p>A versatile theme perfect for any e-commerce business. Features a clean layout, product showcase sections, and easy navigation.</p>
+        <span class="theme-price">₹1,299 <small>Lifetime</small></span>
+        <button class="select-theme-btn">Select Theme</button>
+    </div>
+`;
+
+            } else if (theme === 'clothing') {
+                title.textContent = 'Clothing Store Theme';
+              details.innerHTML = `
+    <div class="theme-option">
+        <div class="theme-preview">
+            <img src="image/Clothing Store.PNG" alt="Clothing Store Preview" />
+        </div>
+        <h4>Clothing Store</h4>
+        <p>Fashion-forward design with lookbooks, category grids, and size guides. Perfect for apparel retailers and boutique shops.</p>
+        <span class="theme-price">₹1,499 <small>Lifetime</small></span>
+        <button class="select-theme-btn">Select Theme</button>
+    </div>
+`;
+
+            } else if (theme === 'footwear') {
+                title.textContent = 'Premium Footwear Theme';
+details.innerHTML = `
+    <div class="theme-option">
+        <div class="theme-preview">
+            <img src="image/Premium Footwear Store.PNG" alt="Footwear Store Preview" />
+        </div>
+        <h4>Premium Footwear</h4>
+        <p>Elegant design showcasing footwear collections with 360° product views, size charts, and brand storytelling sections.</p>
+        <span class="theme-price">₹1,799 <small>Lifetime</small></span>
+        <button class="select-theme-btn">Select Theme</button>
+    </div>
+`;
+            } else if (theme === 'cafe') {
+                title.textContent = 'Cafe & Organic Foods Theme';
+                details.innerHTML = `
+    <div class="theme-option">
+        <div class="theme-preview">
+            <img src="image/Art & Prints Store.PNG" alt="Cafe Theme Preview" />
+        </div>
+        <h4>Cafe & Organic Foods</h4>
+        <p>Warm, inviting design featuring menu displays, ingredient sourcing info, and online ordering for cafes and organic shops.</p>
+        <span class="theme-price">₹1,999 <small>Lifetime</small></span>
+        <button class="select-theme-btn">Select Theme</button>
+    </div>
+`;
+
+            }
+            
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
+        }
+
+        function closeThemeModal() {
+            const modal = document.getElementById('themeModal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('themeModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeThemeModal();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add staggered animation to cards
+            const cards = document.querySelectorAll('.store-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${0.2 + (index * 0.1)}s`;
+            });
+
+            // Settings options functionality
+            const settingsOptions = document.querySelectorAll('.settings-option');
+            settingsOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const text = this.textContent.trim();
+                    
+                    if (text === 'Logout') {
+                        if (confirm('Are you sure you want to logout?')) {
+                            alert('Logging out...');
+                        }
+                    } else {
+                        alert(`${text} feature coming soon!`);
+                    }
+                });
+            });
+
+            // Theme selection functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('select-theme-btn')) {
+                    const themeName = e.target.parentElement.querySelector('h4').textContent;
+                    const themePrice = e.target.parentElement.querySelector('.theme-price').textContent;
+                    
+                    if (confirm(`Are you sure you want to select ${themeName} for ${themePrice}?`)) {
+                        e.target.innerHTML = '<i class="fas fa-check"></i> Selected';
+                        e.target.style.background = 'var(--accent)';
+                        setTimeout(() => {
+                            closeThemeModal();
+                            alert(`${themeName} has been selected for your store!`);
+                        }, 1000);
+                    }
+                }
+            });
+        });
+
+        // Add dynamic greeting based on time
+        function updateGreeting() {
+            const now = new Date();
+            const hour = now.getHours();
+            const welcomeText = document.querySelector('.welcome-text');
+            
+            let greeting = 'Welcome back';
+            if (hour < 12) greeting = 'Good morning';
+            else if (hour < 17) greeting = 'Good afternoon';
+            else greeting = 'Good evening';
+            
+            if (welcomeText) {
+                welcomeText.textContent = `${greeting}, Vijay!`;
+            }
+        }
+
+        updateGreeting();
+    </script>
+</body>
+</html>

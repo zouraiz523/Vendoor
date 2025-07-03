@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Training - Coming Soon | Vendoora</title>
+    <link rel="icon" href="image/log.png" type="image/png">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+ :root {
+  /* === Brand Colors === */
+  --primary: #00A5A8;              /* Deep Teal - Main buttons, links */
+  --primary-light: #00c4c7;        /* Lighter Teal - Hover states */
+  
+  --secondary: #FF6B6B;            /* Vibrant Coral - Tags, alerts */
+  --secondary-light: #ff8e8e;      /* Light Coral - Hover, backgrounds */
+  
+  --accent: #9A7EE6;               /* Soft Lavender - Headings, icons */
+
+  /* === Neutral Colors === */
+  --neutral-light: #F7F7F7;        /* Light background */
+  --neutral-dark: #2D3436;         /* Dark text, footer */
+  --white: #FFFFFF;                /* Plain white */
+  --grey: #E0E0E0;                 /* Light gray border */
+
+  /* === Gradient / Custom Additions === */
+  --pink: #d32b84;                 /* Logo pink */
+  --orange: #FFA500;              /* Accent orange for gradient */
+  --gradient-pink-orange: linear-gradient(to right, #d32b84, #FFA500); /* For buttons/sections */
+
+  /* === UI Effects === */
+  --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Button/card shadow */
+  --transition: all 0.3s ease;             /* Smooth transition */
+  --radius: 12px;                          /* Rounded corners */
+}
+
+.coming-soon {
+    text-align: center;
+    padding: 8rem 0;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.coming-soon-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.coming-soon h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary);
+}
+
+.coming-soon p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--text);
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.countdown-item {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    min-width: 100px;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+}
+
+.notify-form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.notify-input {
+    flex: 1;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 50px 0 0 50px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.notify-btn {
+    background: linear-gradient(to right, #d32b84, #FFA500);
+    color: white;
+    border: none;
+    padding: 0 2rem;
+    border-radius: 0 50px 50px 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.notify-btn:hover {
+    opacity: 0.9;
+}
+
+.social-links-coming {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-link-coming {
+    width: 45px;
+    height: 45px;
+    background: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.social-link-coming:hover {
+    transform: translateY(-3px);
+    background: var(--primary);
+    color: white;
+}
+
+/* Language Dropdown Styles */
+.lang-dropdown {
+  position: relative;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0,0,0,0.1);
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  color: #2D3436;
+  font-weight: 500;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.lang-btn:hover {
+  background: white;
+  transform: translateY(-2px);
+}
+
+.lang-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  min-width: 150px;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  z-index: 1000;
+  margin-top: 10px;
+}
+
+.lang-dropdown.active .lang-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #2D3436;
+  font-size: 14px;
+}
+
+.lang-option:hover {
+  background: #F7F7F7;
+  color: #FF6B6B;
+}
+
+.lang-flag {
+  width: 20px;
+  height: 15px;
+  border-radius: 2px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .language-header {
+    padding: 10px 15px;
+  }
+  
+  .language-header .logo img {
+    height: 35px;
+  }
+  
+  .lang-btn {
+    padding: 6px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .language-header .logo img {
+    height: 30px;
+  }
+
+  .lang-btn span {
+    display: none;
+  }
+
+  .lang-btn i.fa-globe {
+    margin-right: 0;
+  }
+}
+    </style>
+</head>
+<body>
+    
+    <!-- Header -->
+    <header id="navbar">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <img src="image/log.png" alt="Vendoora Logo" data-key="logoAlt">
+                </a>
+                
+                <nav class="nav-center" id="nav">
+                    <a href="index.html" data-key="navHome">Home</a>
+                    
+                    <!-- E-Commerce Dropdown -->
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" data-key="navEcommerce">
+                            E-Commerce  
+                            <span style="background: #ff4757; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;" data-key="navNew">NEW</span> 
+                            <i class="fas fa-chevron-down" style="margin-left: 6px;"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                            <a href="Online Store Builder.html" data-key="navStoreBuilder">Online Store Builder</a>
+                            <a href="Training Coming Soon.html" data-key="navTraining">Online Training - Coming Soon</a>
+                        </div>
+                    </div>
+
+                    <a href="Pricing.html" data-key="navPricing">Pricing</a>
+                    <a href="Tools AI.html" data-key="navToolsAI">Tools AI</a>
+                    <a href="Blog.html" data-key="navBlog">Blog</a>
+                    <a href="About us.html" data-key="navAbout">About us</a>
+                    
+                    <div class="mobile-buttons">
+                        <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+                    </div>
+                </nav>
+                
+                <div class="header-right">
+                    <a href="form.html" class="login-btn" data-key="loginButton">Login</a>
+                    
+                    <div class="lang-dropdown" id="langDropdown">
+                        <button class="lang-btn" id="langBtn">
+                            <i class="fas fa-globe"></i>
+                            <span id="currentLang" data-key="currentLanguage">English</span>
+                            <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                        </button>
+                        <div class="lang-dropdown-menu">
+                            <a href="#" class="lang-option" data-lang="ar">
+                                <span class="lang-flag">🇸🇦</span>
+                                <span data-key="langArabic">العربية</span>
+                            </a>
+                            <a href="#" class="lang-option" data-lang="en">
+                                <span class="lang-flag">🇺🇸</span>
+                                <span data-key="langEnglish">English</span>
+                            </a>
+                            <a href="#" class="lang-option" data-lang="fr">
+                                <span class="lang-flag">🇫🇷</span>
+                                <span data-key="langFrench">Français</span>
+                            </a>
+                            <a href="#" class="lang-option" data-lang="tr">
+                                <span class="lang-flag">🇹🇷</span>
+                                <span data-key="langTurkish">Türkçe</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+                </div>
+                
+                <button class="menu-toggle" onclick="toggleMenu()" data-key="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+ 
+    <!-- Coming Soon Section -->
+    <section class="coming-soon">
+        <div class="container">
+            <div class="coming-soon-content">
+                <i class="fas fa-graduation-cap" style="font-size: 5rem; color: var(--primary); margin-bottom: 2rem;"></i>
+                <h1 data-key="trainingTitle">Online Training Coming Soon</h1>
+                <p data-key="trainingDescription">We're working hard to bring you comprehensive e-commerce training courses to help you grow your online business. Sign up to be notified when we launch!</p>
+                
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">30</div>
+                        <div class="countdown-label" data-key="daysLabel">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">12</div>
+                        <div class="countdown-label" data-key="hoursLabel">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">45</div>
+                        <div class="countdown-label" data-key="minutesLabel">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">30</div>
+                        <div class="countdown-label" data-key="secondsLabel">Seconds</div>
+                    </div>
+                </div>
+                
+                <form class="notify-form">
+                    <input type="email" class="notify-input" placeholder="Enter your email address" required data-key="emailPlaceholder">
+                    <button type="submit" class="notify-btn" data-key="notifyButton">Notify Me</button>
+                </form>
+                
+                <div class="social-links-coming">
+                    <a href="#" class="social-link-coming"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link-coming"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link-coming"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link-coming"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+
+  
+  <!-- Footer -->
+  <footer>
+    <!-- Animated Background -->
+    <div class="footer-bg-animation">
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+    </div>
+
+    <div class="footer-content">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Company Section -->
+          <div class="footer-company">
+            <div class="company-header">
+              <div class="logo-container">
+                <div class="logo-icon" data-key="footerLogoIcon">V</div>
+              </div>
+              <a href="index.html" class="company-name" data-key="footerCompanyName">Vendoora</a>
+            </div>
+            <p class="company-description" data-key="footerAbout">
+              Vendoora wants you to spend less time staring at a screen and use more of your time growing your business. Create your online store in minutes with powerful AI tools and seamless integrations.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Facebook" data-key="socialFacebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Twitter" data-key="socialTwitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram" data-key="socialInstagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="LinkedIn" data-key="socialLinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="YouTube" data-key="socialYouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company Links -->
+          <div class="footer-column">
+            <h4 data-key="footerCompany">Company</h4>
+            <ul class="footer-links">
+              <li><a href="index.html" data-key="footerHome">Home Page</a></li>
+              <li><a href="About us.html" data-key="footerAboutUs">About Us</a></li>
+              <li><a href="Online Store Builder.html" data-key="footerEcommerce">E-commerce</a></li>
+              <li><a href="Pricing.html" data-key="footerPricing">Pricing</a></li>
+              <li><a href="Blog.html" data-key="footerBlog">Blog</a></li>
+            </ul>
+          </div>
+
+          <!-- Support Links -->
+          <div class="footer-column">
+            <h4 data-key="footerSupport">Support</h4>
+            <ul class="footer-links">
+              <li><a href="#" data-key="footerCareer">Career</a></li>
+              <li><a href="#" data-key="footerAffiliates">Affiliates</a></li>
+              <li><a href="#" data-key="footerFAQ">FAQ</a></li>
+              <li><a href="#" data-key="footerTerms">Terms</a></li>
+              <li><a href="#" data-key="footerSecurity">Security</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources Links -->
+          <div class="footer-column">
+            <h4 data-key="footerResources">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="Blog.html" data-key="footerBlog2">Blog</a></li>
+              <li><a href="#" data-key="footerHelpCenter">Help Center</a></li>
+              <li><a href="#" data-key="footerMadeWith">Made with Vendoora</a></li>
+              <li><a href="#" data-key="footerTutorials">Tutorials</a></li>
+              <li><a href="#" data-key="footerAPIDocs">API Docs</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact & Newsletter -->
+          <div class="footer-column">
+            <div class="newsletter-section">
+              <h4 data-key="footerContact">Contact Info</h4>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span data-key="footerAddress">Lahore, Punjab, Pakistan</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span data-key="footerEmail">info@vendoora.com</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span data-key="footerPhone">+92 300 1234567</span>
+              </div>
+
+              <h4 style="margin-top: 2rem;" data-key="footerNewsletter">Newsletter</h4>
+              <p class="newsletter-description" data-key="footerNewsletterDesc">
+                Subscribe to our newsletter for the latest updates and special offers.
+              </p>
+              <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required data-key="footerNewsletterInput">
+                <button type="submit" class="newsletter-btn" aria-label="Subscribe" data-key="footerNewsletterBtn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p data-key="footerCopyright">Copyright © Vendoora 2025 - All Rights Reserved</p>
+          <p data-key="footerCredit">Coding with <i class="fas fa-heart heart"></i> by <span class="designer" data-key="footerDesigner">Zouraiz</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+    <script src="js/menu.js"></script>
+    <script src="js/lang-switcher.js"></script>
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('nav');
+            const toggle = document.querySelector('.menu-toggle i');
+            
+            nav.classList.toggle('active');
+            
+            if (nav.classList.contains('active')) {
+                toggle.classList.remove('fa-bars');
+                toggle.classList.add('fa-times');
+            } else {
+                toggle.classList.remove('fa-times');
+                toggle.classList.add('fa-bars');
+            }
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const launchDate = new Date('2025-07-01T00:00:00');
+            const diff = launchDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+
+
+        function toggleMenu() {
+            const nav = document.getElementById('nav');
+            const toggle = document.querySelector('.menu-toggle i');
+            
+            nav.classList.toggle('active');
+            
+            if (nav.classList.contains('active')) {
+                toggle.classList.remove('fa-bars');
+                toggle.classList.add('fa-times');
+            } else {
+                toggle.classList.remove('fa-times');
+                toggle.classList.add('fa-bars');
+            }
+        }
+
+        // Countdown Timer
+        function updateCountdown() {
+            const now = new Date();
+            const launchDate = new Date('2025-07-01T00:00:00');
+            const diff = launchDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Language Switcher Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+          const langBtn = document.getElementById('langBtn');
+          const langDropdown = document.getElementById('langDropdown');
+          const currentLang = document.getElementById('currentLang');
+          const langOptions = document.querySelectorAll('.lang-option');
+          
+          // Toggle dropdown
+          langBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            langDropdown.classList.toggle('active');
+          });
+          
+          // Handle language selection
+          langOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+              e.preventDefault();
+              const lang = this.getAttribute('data-lang');
+              const langText = this.querySelector('span:last-child').textContent;
+              
+              currentLang.textContent = lang.toUpperCase();
+              langDropdown.classList.remove('active');
+              
+              // Show language change message
+              const successMessage = document.getElementById('successMessage');
+              if (successMessage) {
+                successMessage.textContent = `Language changed to ${langText}`;
+                successMessage.style.display = 'block';
+                
+                setTimeout(() => {
+                  successMessage.style.display = 'none';
+                }, 3000);
+              }
+            });
+          });
+          
+          // Close dropdown when clicking outside
+          document.addEventListener('click', function(e) {
+            if (!langDropdown.contains(e.target) && !langBtn.contains(e.target)) {
+              langDropdown.classList.remove('active');
+            }
+          });
+        });
+    </script>
+</body>
+</html>

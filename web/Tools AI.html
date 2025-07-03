@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-powered tools for your e-commerce business">
+    <title>AI Tools - Vendoora</title>
+    <link rel="icon" href="image/log.png" type="image/png">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    
+/* AI Tools Specific Styles */
+:root {
+    --primary: #00A5A8; /* Deep Teal */
+    --primary-light: #bfcece;
+    --secondary: #FF6B6B; /* Vibrant Coral */
+    --accent: #9A7EE6; /* Soft Lavender */
+    --grey: #F7F7F7; /* Neutral Light */
+    --text: #2D3436; /* Neutral Dark */
+    --text-light: #555;
+    --pink: #d32b84;
+    --orange: #FFA500;
+}
+
+.ai-hero {
+    background: linear-gradient(135deg, #f0f8f0 0%, #e6f3f2 100%);
+    padding: 6rem 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="%2300A5A8" opacity="0.05" d="M0,0 L100,0 L100,100 L0,100 Z" /></svg>') center/cover no-repeat;
+    opacity: 0.1;
+}
+
+.ai-hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(to right, var(--primary), var(--primary-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+.ai-hero p {
+    font-size: 1.2rem;
+    color: var(--text);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.ai-tools-section {
+    padding: 5rem 0;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.section-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.ai-tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.ai-tool-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.ai-tool-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.ai-tool-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary), var(--primary-light));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+}
+
+.ai-tool-card:hover::after {
+    transform: scaleX(1);
+}
+
+.tool-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    color: white;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 15px rgba(0, 165, 168, 0.3);
+}
+
+.ai-tool-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.ai-tool-card p {
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.95rem;
+}
+
+.btn-primary {
+    background: linear-gradient(to right, var(--pink), var(--orange));
+    color: white;
+    box-shadow: 0 4px 15px rgba(211, 43, 132, 0.3);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, var(--orange), var(--pink));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(211, 43, 132, 0.4);
+}
+
+.btn-outline {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background: rgba(0, 165, 168, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Pink button style */
+.btn-pink {
+    background: var(--secondary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+.btn-pink:hover {
+    background: #ff5252;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+}
+
+.ai-features-section {
+    background: var(--grey);
+    padding: 5rem 0;
+    position: relative;
+}
+
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card h4 {
+    margin-bottom: 1rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.feature-card h4 i {
+    color: var(--primary);
+}
+
+.feature-card p {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.ai-demo-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--primary) 5%, var(--primary-light) 49%);
+    color: white;
+    text-align: center;
+}
+
+.ai-demo-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.ai-demo-section p {
+    max-width: 700px;
+    margin: 0 auto 2rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.demo-container {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 3rem auto 0;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.demo-placeholder {
+    background: var(--grey);
+    border-radius: 8px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    font-size: 1.2rem;
+}
+
+/* Update for NEW tag in header */
+.dropdown-toggle span {
+    background: var(--secondary) !important;
+    color: white !important;
+}
+
+@media (max-width: 768px) {
+    .ai-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .ai-tools-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+.delay-1 {
+    animation-delay: 0.5s;
+}
+
+.delay-2 {
+    animation-delay: 1s;
+}
+
+/* Footer Styles */
+footer {
+    background: var(--text);
+    color: white;
+}
+
+.footer-content {
+    background: var(--text);
+}
+
+.footer-links a,
+.company-description,
+.newsletter-description,
+.contact-item {
+    color: rgba(255,255,255,0.8);
+}
+
+.footer-links a:hover {
+    color: var(--primary);
+}
+
+.social-link {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.social-link:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.newsletter-input {
+    background: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.newsletter-input::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+.heart {
+    color: var(--secondary);
+}
+
+.designer {
+    color: var(--primary);
+}
+    </style>
+</head>
+<body>
+      <!-- Header -->
+    <header id="navbar">
+        <div class="container">
+          <div class="header-content">
+            <a href="#" class="logo">
+              <img src="image/log.png" alt="Vendoora Logo" data-key="logoAlt">
+            </a>
+            
+            <nav class="nav-center" id="nav">
+              <a href="index.html" data-key="navHome">Home</a>
+              
+              <!-- E-Commerce Dropdown -->
+              <div class="dropdown">
+                <a class="dropdown-toggle" data-key="navEcommerce">
+                  E-Commerce  
+                  <span style="background: #ff4757; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;" data-key="navNew">NEW</span> 
+                  <i class="fas fa-chevron-down" style="margin-left: 6px;"></i>
+                </a>
+                <div class="dropdown-menu">
+                  <a href="Online Store Builder.html" data-key="navStoreBuilder">Online Store Builder</a>
+                  <a href="Training Coming Soon.html" data-key="navTraining">Online Training - Coming Soon</a>
+                </div>
+              </div>
+
+              <a href="Pricing.html" data-key="navPricing">Pricing</a>
+              <a href="Tools AI.html" data-key="navToolsAI">Tools AI</a>
+              <a href="Blog.html" data-key="navBlog">Blog</a>
+              <a href="About us.html" data-key="navAbout">About us</a>
+              
+              <div class="mobile-buttons">
+                <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+              </div>
+            </nav>
+            
+            <div class="header-right">
+              <a href="form.html" class="login-btn" data-key="loginButton">Login</a>
+              
+              <div class="lang-dropdown" id="langDropdown">
+                <button class="lang-btn" id="langBtn">
+                  <i class="fas fa-globe"></i>
+                  <span id="currentLang" data-key="currentLanguage">English</span>
+                  <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+                </button>
+                <div class="lang-dropdown-menu">
+                  <a href="#" class="lang-option" data-lang="ar">
+                    <span class="lang-flag">🇸🇦</span>
+                    <span data-key="langArabic">العربية</span>
+                  </a>
+                  <a href="#" class="lang-option" data-lang="en">
+                    <span class="lang-flag">🇺🇸</span>
+                    <span data-key="langEnglish">English</span>
+                  </a>
+                  <a href="#" class="lang-option" data-lang="fr">
+                    <span class="lang-flag">🇫🇷</span>
+                    <span data-key="langFrench">Français</span>
+                  </a>
+                  <a href="#" class="lang-option" data-lang="tr">
+                    <span class="lang-flag">🇹🇷</span>
+                    <span data-key="langTurkish">Türkçe</span>
+                  </a>
+                </div>
+              </div>
+              
+              <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+            </div>
+            
+            <button class="menu-toggle" onclick="toggleMenu()" data-key="menuToggle">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+
+    <!-- AI Hero Section -->
+    <section class="ai-hero">
+        <div class="container">
+            <h1 data-key="aiHeroTitle">Your AI-Powered Business Partner</h1>
+            <p data-key="aiHeroDescription">Vendoora's intelligent tools help you create, optimize, and grow your online store with the power of artificial intelligence.</p>
+            <a href="form.html" class="btn btn-primary" data-key="getStartedButton">
+                <i class="fas fa-rocket"></i>
+                <span data-key="getStartedButtonText">Get Started Free</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- AI Tools Section -->
+    <section class="ai-tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-key="aiToolsTitle">Smart Tools for Smart Businesses</h2>
+                <p data-key="aiToolsDescription">Our AI-powered features are designed to save you time and help you make data-driven decisions to grow your online store.</p>
+            </div>
+            
+            <div class="ai-tools-grid">
+                <div class="ai-tool-card floating">
+                    <div class="tool-icon">
+                        <i class="fas fa-comment-alt" data-key="aiTool1Icon"></i>
+                    </div>
+                    <h3 data-key="aiTool1Title">AI Product Descriptions</h3>
+                    <p data-key="aiTool1Desc">Generate compelling, SEO-optimized product descriptions in seconds. Our AI understands your products and creates descriptions that convert visitors into customers.</p>
+                    <a href="#" class="btn btn-outline" data-key="tryNowButton">Try It Now</a>
+                </div>
+                
+                <div class="ai-tool-card floating delay-1">
+                    <div class="tool-icon">
+                        <i class="fas fa-image" data-key="aiTool2Icon"></i>
+                    </div>
+                    <h3 data-key="aiTool2Title">AI Product Images</h3>
+                    <p data-key="aiTool2Desc">Transform your product photos with AI. Remove backgrounds, enhance quality, or generate completely new product images that showcase your items in the best light.</p>
+                    <a href="#" class="btn btn-outline" data-key="tryNowButton">Try It Now</a>
+                </div>
+                
+                <div class="ai-tool-card floating delay-2">
+                    <div class="tool-icon">
+                        <i class="fas fa-chart-pie" data-key="aiTool3Icon"></i>
+                    </div>
+                    <h3 data-key="aiTool3Title">Smart Analytics</h3>
+                    <p data-key="aiTool3Desc">Get actionable insights about your store's performance. Our AI analyzes your data and provides recommendations to boost sales and improve customer experience.</p>
+                    <a href="#" class="btn btn-outline" data-key="tryNowButton">Try It Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Features Section -->
+    <section class="ai-features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 data-key="aiFeaturesTitle">How AI Powers Your Success</h2>
+                <p data-key="aiFeaturesDescription">Vendoora's artificial intelligence works behind the scenes to help you at every step of your e-commerce journey.</p>
+            </div>
+            
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h4><i class="fas fa-magic" data-key="aiFeature1Icon"></i> <span data-key="aiFeature1Title">Smart Design Suggestions</span></h4>
+                    <p data-key="aiFeature1Desc">Our AI analyzes your products and brand to recommend the perfect color schemes, layouts, and design elements that will appeal to your target audience.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-search-dollar" data-key="aiFeature2Icon"></i> <span data-key="aiFeature2Title">SEO Optimization</span></h4>
+                    <p data-key="aiFeature2Desc">Automatically optimize your product pages for search engines with AI-generated meta tags, keywords, and content that helps you rank higher.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-bullseye" data-key="aiFeature3Icon"></i> <span data-key="aiFeature3Title">Targeted Marketing</span></h4>
+                    <p data-key="aiFeature3Desc">AI identifies your best customers and helps you create personalized marketing campaigns that increase conversions and customer loyalty.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-robot" data-key="aiFeature4Icon"></i> <span data-key="aiFeature4Title">Inventory Management</span></h4>
+                    <p data-key="aiFeature4Desc">Predict demand and optimize your inventory with AI-powered forecasting that helps you avoid stockouts and overstocking.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-comments-dollar" data-key="aiFeature5Icon"></i> <span data-key="aiFeature5Title">Smart Pricing</span></h4>
+                    <p data-key="aiFeature5Desc">Our AI analyzes market trends and competitor pricing to suggest optimal price points that maximize your profits while staying competitive.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-headset" data-key="aiFeature6Icon"></i> <span data-key="aiFeature6Title">24/7 AI Support</span></h4>
+                    <p data-key="aiFeature6Desc">AI-powered chatbots provide instant customer support in multiple languages, answering questions and helping customers anytime.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2 data-key="ctaTitle">Ready to Start Selling Online?</h2>
+      <p data-key="ctaDesc">Join thousands of successful businesses already using Vendoora</p>
+      <a href="form.html" class="cta-button" data-key="ctaButton">
+        <i class="fas fa-rocket"></i>
+        <span data-key="ctaButtonText">Create Your Store Now - It's Free!</span>
+      </a>
+      <p class="cta-note" data-key="ctaNote">No credit card required • Free plan available • Cancel anytime</p>
+    </div>
+  </section>
+  <br>
+    
+  <!-- Footer -->
+  <footer>
+    <!-- Animated Background -->
+    <div class="footer-bg-animation">
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+    </div>
+
+    <div class="footer-content">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Company Section -->
+          <div class="footer-company">
+            <div class="company-header">
+              <div class="logo-container">
+                <div class="logo-icon" data-key="footerLogoIcon">V</div>
+              </div>
+              <a href="index.html" class="company-name" data-key="footerCompanyName">Vendoora</a>
+            </div>
+            <p class="company-description" data-key="footerAbout">
+              Vendoora wants you to spend less time staring at a screen and use more of your time growing your business. Create your online store in minutes with powerful AI tools and seamless integrations.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Facebook" data-key="socialFacebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Twitter" data-key="socialTwitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram" data-key="socialInstagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="LinkedIn" data-key="socialLinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="YouTube" data-key="socialYouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company Links -->
+          <div class="footer-column">
+            <h4 data-key="footerCompany">Company</h4>
+            <ul class="footer-links">
+              <li><a href="index.html" data-key="footerHome">Home Page</a></li>
+              <li><a href="About us.html" data-key="footerAboutUs">About Us</a></li>
+              <li><a href="Online Store Builder.html" data-key="footerEcommerce">E-commerce</a></li>
+              <li><a href="Pricing.html" data-key="footerPricing">Pricing</a></li>
+              <li><a href="Blog.html" data-key="footerBlog">Blog</a></li>
+            </ul>
+          </div>
+
+          <!-- Support Links -->
+          <div class="footer-column">
+            <h4 data-key="footerSupport">Support</h4>
+            <ul class="footer-links">
+              <li><a href="#" data-key="footerCareer">Career</a></li>
+              <li><a href="#" data-key="footerAffiliates">Affiliates</a></li>
+              <li><a href="#" data-key="footerFAQ">FAQ</a></li>
+              <li><a href="#" data-key="footerTerms">Terms</a></li>
+              <li><a href="#" data-key="footerSecurity">Security</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources Links -->
+          <div class="footer-column">
+            <h4 data-key="footerResources">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="Blog.html" data-key="footerBlog2">Blog</a></li>
+              <li><a href="#" data-key="footerHelpCenter">Help Center</a></li>
+              <li><a href="#" data-key="footerMadeWith">Made with Vendoora</a></li>
+              <li><a href="#" data-key="footerTutorials">Tutorials</a></li>
+              <li><a href="#" data-key="footerAPIDocs">API Docs</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact & Newsletter -->
+          <div class="footer-column">
+            <div class="newsletter-section">
+              <h4 data-key="footerContact">Contact Info</h4>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span data-key="footerAddress">Lahore, Punjab, Pakistan</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span data-key="footerEmail">info@vendoora.com</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span data-key="footerPhone">+92 300 1234567</span>
+              </div>
+
+              <h4 style="margin-top: 2rem;" data-key="footerNewsletter">Newsletter</h4>
+              <p class="newsletter-description" data-key="footerNewsletterDesc">
+                Subscribe to our newsletter for the latest updates and special offers.
+              </p>
+              <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required data-key="footerNewsletterInput">
+                <button type="submit" class="newsletter-btn" aria-label="Subscribe" data-key="footerNewsletterBtn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p data-key="footerCopyright">Copyright © Vendoora 2025 - All Rights Reserved</p>
+          <p data-key="footerCredit">Coding with <i class="fas fa-heart heart"></i> by <span class="designer" data-key="footerDesigner">Zouraiz</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    
+    <script src="js/menu.js"></script>
+    <script src="js/lang-switcher.js"></script>
+    <script src="js/script.js"></script>
+
+    <script>
+        // Smooth navigation hide/show on scroll
+        let lastScrollTop = 0;
+        let scrollTimer = null;
+        const navbar = document.getElementById('navbar');
+        
+        function handleScroll() {
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+          
+          if (currentScroll > lastScrollTop && currentScroll > 100) {
+            // Scrolling down - hide navbar
+            navbar.classList.add('nav-hidden');
+            navbar.classList.remove('nav-visible');
+          } else if (currentScroll < lastScrollTop) {
+            // Scrolling up - show navbar
+            navbar.classList.add('nav-visible');
+            navbar.classList.remove('nav-hidden');
+          }
+          
+          // Always show at top
+          if (currentScroll <= 100) {
+            navbar.classList.add('nav-visible');
+            navbar.classList.remove('nav-hidden');
+          }
+          
+          lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+        }
+        
+        // Throttled scroll event
+        window.addEventListener('scroll', function() {
+          if (scrollTimer) clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(handleScroll, 10);
+        });
+
+        // Initialize navbar as visible
+        navbar.classList.add('nav-visible');
+
+        // Toggle mobile menu
+        function toggleMenu() {
+          const nav = document.getElementById('nav');
+          const toggle = document.querySelector('.menu-toggle i');
+          
+          nav.classList.toggle('active');
+          
+          if (nav.classList.contains('active')) {
+            toggle.classList.remove('fa-bars');
+            toggle.classList.add('fa-times');
+          } else {
+            toggle.classList.remove('fa-times');
+            toggle.classList.add('fa-bars');
+          }
+        }
+
+        // Language dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+          const langDropdown = document.getElementById('langDropdown');
+          const langBtn = document.getElementById('langBtn');
+          const currentLang = document.getElementById('currentLang');
+          const langOptions = document.querySelectorAll('.lang-option');
+
+          // Toggle dropdown
+          langBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            langDropdown.classList.toggle('active');
+          });
+
+          // Handle language selection
+          langOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+              e.preventDefault();
+              const lang = this.getAttribute('data-lang');
+              const langText = this.querySelector('span:last-child').textContent;
+              
+              currentLang.textContent = langText;
+              langDropdown.classList.remove('active');
+            });
+          });
+
+          // Close dropdown when clicking outside
+          document.addEventListener('click', function(e) {
+            if (!langDropdown.contains(e.target)) {
+              langDropdown.classList.remove('active');
+            }
+          });
+
+          // Close mobile menu when clicking on nav links
+          document.querySelectorAll('.nav-center a').forEach(link => {
+            link.addEventListener('click', () => {
+              document.getElementById('nav').classList.remove('active');
+              document.querySelector('.menu-toggle i').classList.remove('fa-times');
+              document.querySelector('.menu-toggle i').classList.add('fa-bars');
+            });
+          });
+        });
+
+        // Animation for AI tool cards on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate__animated', 'animate__fadeInUp');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.ai-tool-card, .feature-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Vendoora | Create Your Online Store Without Coding</title>
+  <meta name="description" content="Learn how Vendoora helps you build a professional online store without coding. Discover e-commerce tips, success stories, and platform features.">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Blog Specific Styles */
+    .blog-hero {
+      background: linear-gradient(135deg, var(--neutral-light) 0%, #e8f4f8 100%);
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 165, 168, 0.1) 0%, transparent 70%);
+      animation: rotate 20s linear infinite;
+    }
+
+    .blog-hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: fadeInUp 0.8s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .blog-hero p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-buttons {
+      position: relative;
+      z-index: 2;
+    }
+
+    .blog-container {
+      padding: 4rem 0;
+      background: linear-gradient(to bottom, var(--white), var(--neutral-light));
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .blog-card {
+      background: var(--white);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 165, 168, 0.08);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      border: 1px solid rgba(0, 165, 168, 0.1);
+    }
+
+    .blog-card.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0, 165, 168, 0.15);
+      border-color: var(--primary);
+    }
+
+    .blog-image {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .blog-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .blog-card:hover .blog-image img {
+      transform: scale(1.1);
+    }
+
+    .blog-category {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: linear-gradient(135deg, var(--accent), #8A6EE6);
+      color: var(--white);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(154, 126, 230, 0.3);
+    }
+
+    .blog-category.featured {
+      background: linear-gradient(135deg, var(--secondary), #FF5252);
+      box-shadow: 0 2px 10px rgba(255, 107, 107, 0.3);
+    }
+
+    .blog-content {
+      padding: 2rem;
+    }
+
+    .blog-date {
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+
+    .blog-date i {
+      color: var(--accent);
+    }
+
+    .blog-title {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: var(--neutral-dark);
+      transition: color 0.3s ease;
+      line-height: 1.4;
+    }
+
+    .blog-card:hover .blog-title {
+      color: var(--primary);
+    }
+
+    .blog-excerpt {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .blog-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--grey);
+    }
+
+    .author-avatar {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--primary);
+    }
+
+    .author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .author-info {
+      flex: 1;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--neutral-dark);
+      font-size: 0.95rem;
+    }
+
+    .author-title {
+      color: var(--text-light);
+      font-size: 0.8rem;
+    }
+
+    .read-more {
+      color: var(--primary);
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .read-more:hover {
+      gap: 1rem;
+      color: var(--accent);
+    }
+
+    .read-more i {
+      transition: transform 0.3s ease;
+    }
+
+    .read-more:hover i {
+      transform: translateX(4px);
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 4rem;
+      gap: 0.8rem;
+    }
+
+    /* Featured Post Styling */
+    .featured-post {
+      grid-column: span 2;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, var(--white), #f8fdfd);
+      border: 2px solid var(--primary);
+    }
+
+    .featured-post .blog-category {
+      background: linear-gradient(135deg, var(--secondary), #FF5252);
+      box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+    }
+
+    .featured-post .blog-title {
+      font-size: 1.6rem;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Hover effects */
+    .blog-card:hover .blog-category {
+      animation: pulse 0.6s ease;
+    }
+
+    /* Responsive Design */
+    @media (min-width: 992px) {
+      .featured-post {
+        flex-direction: row;
+      }
+      
+      .featured-post .blog-image {
+        flex: 1;
+        height: auto;
+      }
+      
+      .featured-post .blog-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 3rem;
+      }
+    }
+
+    @media (max-width: 992px) {
+      .blog-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      }
+      
+      .featured-post {
+        grid-column: span 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .featured-post {
+        grid-column: span 1;
+      }
+      
+      .blog-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .blog-hero p {
+        font-size: 1.1rem;
+      }
+      
+      .blog-hero {
+        padding: 4rem 0 3rem;
+      }
+      
+      .blog-container {
+        padding: 3rem 0;
+      }
+      
+      .blog-content {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .blog-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .blog-hero p {
+        font-size: 1rem;
+      }
+      
+      .blog-title {
+        font-size: 1.2rem;
+      }
+      
+      .featured-post .blog-title {
+        font-size: 1.4rem;
+      }
+      
+      .blog-grid {
+        gap: 1.5rem;
+      }
+    }
+
+    /* Loading animation for blog cards */
+    .blog-card:nth-child(1) { animation-delay: 0.1s; }
+    .blog-card:nth-child(2) { animation-delay: 0.2s; }
+    .blog-card:nth-child(3) { animation-delay: 0.3s; }
+    .blog-card:nth-child(4) { animation-delay: 0.4s; }
+    .blog-card:nth-child(5) { animation-delay: 0.5s; }
+    .blog-card:nth-child(6) { animation-delay: 0.6s; }
+
+    /* Focus states for accessibility */
+    .read-more:focus {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Print styles */
+    @media print {
+      .blog-hero,
+      .pagination {
+        display: none;
+      }
+      
+      .blog-card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid var(--grey);
+      }
+    }
+  </style>
+</head>
+<body>
+  
+ <!-- Header -->
+  <header id="navbar">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <img src="image/log.png" alt="Vendoora Logo" data-key="logoAlt">
+        </a>
+        
+        <nav class="nav-center" id="nav">
+          <a href="index.html" data-key="navHome">Home</a>
+          
+          <!-- E-Commerce Dropdown - Fixed -->
+          <div class="dropdown">
+            <a class="dropdown-toggle" data-key="navEcommerce">
+              E-Commerce  
+              <span style="background: #ff4757; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;" data-key="navNew">NEW</span> 
+              <i class="fas fa-chevron-down" style="margin-left: 6px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="Online Store Builder.html" data-key="navStoreBuilder">Online Store Builder</a>
+              <a href="Training Coming Soon.html" data-key="navTraining">Online Training - Coming Soon</a>
+            </div>
+          </div>
+          <a href="Pricing.html" data-key="navPricing">Pricing</a>
+          <a href="Tools AI.html" data-key="navToolsAI">Tools AI</a>
+          <a href="Blog.html" data-key="navBlog">Blog</a>
+          <a href="About us.html" data-key="navAbout">About us</a>
+          <div class="mobile-buttons">
+            <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+          </div>
+        </nav>
+        
+        <div class="header-right">
+          <a href="form.html" class="login-btn" data-key="loginButton">Login</a>
+          
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-btn" id="langBtn">
+              <i class="fas fa-globe"></i>
+              <span id="currentLang" data-key="currentLanguage">English</span>
+              <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+            </button>
+            <div class="lang-dropdown-menu">
+              <a href="#" class="lang-option" data-lang="ar">
+                <span class="lang-flag">🇸🇦</span>
+                <span data-key="langArabic">العربية</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="en">
+                <span class="lang-flag">🇺🇸</span>
+                <span data-key="langEnglish">English</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="fr">
+                <span class="lang-flag">🇫🇷</span>
+                <span data-key="langFrench">Français</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="tr">
+                <span class="lang-flag">🇹🇷</span>
+                <span data-key="langTurkish">Türkçe</span>
+              </a>
+            </div>
+          </div>
+          
+          <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMenu()" data-key="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Blog Hero Section -->
+  <section class="blog-hero">
+    <div class="container">
+      <h1 data-key="blogTitle">Vendoora Blog</h1>
+      <p data-key="blogDescription">Discover e-commerce success stories, platform updates, and expert tips to grow your online business without any coding knowledge.</p>
+      <div class="hero-buttons">
+        <a href="form.html" class="btn btn-primary" data-key="blogCtaButton">
+          <i class="fas fa-store"></i>
+          <span data-key="blogCtaText">Start Your Store Today</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog Posts Section -->
+  <section class="blog-container">
+    <div class="container">
+      <div class="blog-grid">
+        <!-- Featured Post -->
+        <article class="blog-card featured-post animated">
+          <div class="blog-image">
+            <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="E-commerce success" data-key="featuredPostImageAlt">
+            <span class="blog-category" data-key="featuredPostCategory">Featured</span>
+          </div>
+          <div class="blog-content">
+            <div class="blog-date">
+              <i class="far fa-calendar-alt"></i> <span data-key="featuredPostDate">June 15, 2025</span>
+            </div>
+            <h2 class="blog-title" data-key="featuredPostTitle">Why Vendoora is the Best Choice for Your Online Business</h2>
+            <p class="blog-excerpt" data-key="featuredPostExcerpt">Discover how Vendoora helps entrepreneurs create professional online stores in minutes without any coding. Our platform combines powerful AI tools with seamless integrations to give your business the competitive edge it needs in today's digital marketplace.</p>
+            <a href="#" class="read-more" data-key="readMoreLink">
+              <span data-key="readMoreText">Read Full Story</span>
+              <i class="fas fa-arrow-right"></i>
+            </a>
+            <div class="blog-author">
+              <div class="author-avatar">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Zouraiz" data-key="authorImageAlt">
+              </div>
+              <div class="author-info">
+                <div class="author-name" data-key="authorName">Zouraiz</div>
+                <div class="author-title" data-key="authorTitle">Lead Developer, Vendoora</div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- [Other blog posts would follow the same pattern with data-key attributes] -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <!-- Animated Background -->
+    <div class="footer-bg-animation">
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+    </div>
+
+    <div class="footer-content">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Company Section -->
+          <div class="footer-company">
+            <div class="company-header">
+              <div class="logo-container">
+                <div class="logo-icon" data-key="footerLogoIcon">V</div>
+              </div>
+              <a href="index.html" class="company-name" data-key="footerCompanyName">Vendoora</a>
+            </div>
+            <p class="company-description" data-key="footerAbout">
+              Vendoora wants you to spend less time staring at a screen and use more of your time growing your business. Create your online store in minutes with powerful AI tools and seamless integrations.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Facebook" data-key="socialFacebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Twitter" data-key="socialTwitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram" data-key="socialInstagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="LinkedIn" data-key="socialLinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="YouTube" data-key="socialYouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company Links -->
+          <div class="footer-column">
+            <h4 data-key="footerCompany">Company</h4>
+            <ul class="footer-links">
+              <li><a href="index.html" data-key="footerHome">Home Page</a></li>
+              <li><a href="About us.html" data-key="footerAboutUs">About Us</a></li>
+              <li><a href="Online Store Builder.html" data-key="footerEcommerce">E-commerce</a></li>
+              <li><a href="Pricing.html" data-key="footerPricing">Pricing</a></li>
+              <li><a href="Blog.html" data-key="footerBlog">Blog</a></li>
+            </ul>
+          </div>
+
+          <!-- Support Links -->
+          <div class="footer-column">
+            <h4 data-key="footerSupport">Support</h4>
+            <ul class="footer-links">
+              <li><a href="#" data-key="footerCareer">Career</a></li>
+              <li><a href="#" data-key="footerAffiliates">Affiliates</a></li>
+              <li><a href="#" data-key="footerFAQ">FAQ</a></li>
+              <li><a href="#" data-key="footerTerms">Terms</a></li>
+              <li><a href="#" data-key="footerSecurity">Security</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources Links -->
+          <div class="footer-column">
+            <h4 data-key="footerResources">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="Blog.html" data-key="footerBlog2">Blog</a></li>
+              <li><a href="#" data-key="footerHelpCenter">Help Center</a></li>
+              <li><a href="#" data-key="footerMadeWith">Made with Vendoora</a></li>
+              <li><a href="#" data-key="footerTutorials">Tutorials</a></li>
+              <li><a href="#" data-key="footerAPIDocs">API Docs</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact & Newsletter -->
+          <div class="footer-column">
+            <div class="newsletter-section">
+              <h4 data-key="footerContact">Contact Info</h4>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span data-key="footerAddress">Lahore, Punjab, Pakistan</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span data-key="footerEmail">info@vendoora.com</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span data-key="footerPhone">+92 300 1234567</span>
+              </div>
+
+              <h4 style="margin-top: 2rem;" data-key="footerNewsletter">Newsletter</h4>
+              <p class="newsletter-description" data-key="footerNewsletterDesc">
+                Subscribe to our newsletter for the latest updates and special offers.
+              </p>
+              <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required data-key="footerNewsletterInput">
+                <button type="submit" class="newsletter-btn" aria-label="Subscribe" data-key="footerNewsletterBtn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p data-key="footerCopyright">Copyright © Vendoora 2025 - All Rights Reserved</p>
+          <p data-key="footerCredit">Coding with <i class="fas fa-heart heart"></i> by <span class="designer" data-key="footerDesigner">Zouraiz</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="js/lang-switcher.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/menu.js"></script>
+  <script>
+    // Animate blog cards on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      const blogCards = document.querySelectorAll('.blog-card');
+      
+      const animateOnScroll = () => {
+        blogCards.forEach(card => {
+          const cardPosition = card.getBoundingClientRect().top;
+          const screenPosition = window.innerHeight / 1.3;
+          
+          if (cardPosition < screenPosition) {
+            card.classList.add('animated');
+          }
+        });
+      };
+      
+      // Initial check
+      animateOnScroll();
+      
+      // Check on scroll
+      window.addEventListener('scroll', animateOnScroll);
+      
+      // Newsletter form handler
+      function handleNewsletter(event) {
+        event.preventDefault();
+        const email = event.target.querySelector('.newsletter-input').value;
+        
+        // Add success animation
+        const button = event.target.querySelector('.newsletter-btn');
+        const icon = button.querySelector('i');
+        
+        icon.className = 'fas fa-check';
+        button.style.background = '#2ecc71';
+        
+        setTimeout(() => {
+          icon.className = 'fas fa-paper-plane';
+          button.style.background = '#238880';
+          event.target.reset();
+        }, 2000);
+        
+        console.log('Newsletter subscription:', email);
+      }
+
+      // Language Switcher Functionality
+      const langBtn = document.getElementById('langBtn');
+      const langDropdown = document.getElementById('langDropdown');
+      const currentLang = document.getElementById('currentLang');
+      const langOptions = document.querySelectorAll('.lang-option');
+      
+      // Toggle dropdown
+      langBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        langDropdown.classList.toggle('active');
+      });
+      
+      // Handle language selection
+      langOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.preventDefault();
+          const lang = this.getAttribute('data-lang');
+          const langText = this.querySelector('span:last-child').textContent;
+          
+          currentLang.textContent = lang.toUpperCase();
+          langDropdown.classList.remove('active');
+        });
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!langDropdown.contains(e.target) && !langBtn.contains(e.target)) {
+          langDropdown.classList.remove('active');
+        }
+      });
+
+      // Toggle mobile menu
+      function toggleMenu() {
+        const nav = document.getElementById('nav');
+        const toggle = document.querySelector('.menu-toggle i');
+        
+        nav.classList.toggle('active');
+        
+        if (nav.classList.contains('active')) {
+          toggle.classList.remove('fa-bars');
+          toggle.classList.add('fa-times');
+        } else {
+          toggle.classList.remove('fa-times');
+          toggle.classList.add('fa-bars');
+        }
+      }
+
+      // Close mobile menu when clicking on nav links
+      document.querySelectorAll('.nav-center a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.getElementById('nav').classList.remove('active');
+          document.querySelector('.menu-toggle i').classList.remove('fa-times');
+          document.querySelector('.menu-toggle i').classList.add('fa-bars');
+        });
+      });
+
+      // Smooth navigation hide/show on scroll
+      let lastScrollTop = 0;
+      let scrollTimer = null;
+      const navbar = document.getElementById('navbar');
+      
+      function handleScroll() {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        
+        if (currentScroll > lastScrollTop && currentScroll > 100) {
+          // Scrolling down - hide navbar
+          navbar.classList.add('nav-hidden');
+          navbar.classList.remove('nav-visible');
+        } else if (currentScroll < lastScrollTop) {
+          // Scrolling up - show navbar
+          navbar.classList.add('nav-visible');
+          navbar.classList.remove('nav-hidden');
+        }
+        
+        // Always show at top
+        if (currentScroll <= 100) {
+          navbar.classList.add('nav-visible');
+          navbar.classList.remove('nav-hidden');
+        }
+        
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      }
+      
+      // Throttled scroll event
+      window.addEventListener('scroll', function() {
+        if (scrollTimer) clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(handleScroll, 10);
+      });
+
+      // Initialize navbar as visible
+      navbar.classList.add('nav-visible');
+    });
+  </script>
+</body>
+</html>

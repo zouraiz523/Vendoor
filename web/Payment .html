@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Secure payment processing for your Vendoora subscription">
+  <title>Payment - Vendoora</title>
+  <link rel="icon" href="image/log.png" type="image/png">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>/* Payment Form Styles */
+.payment-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding: 2rem 0;
+}
+
+.payment-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.payment-header p {
+  color: var(--neutral-dark);
+  opacity: 0.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.payment-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.order-summary {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.order-summary h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  color: var(--neutral-dark);
+}
+
+.order-total {
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--grey);
+}
+
+.payment-form {
+  background-color: var(--white);
+  border-radius: var(--radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.payment-form h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--grey);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--neutral-dark);
+}
+
+.required::after {
+  content: '*';
+  color: var(--secondary);
+  margin-left: 4px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--grey);
+  border-radius: var(--radius);
+  font-size: 1rem;
+  transition: var(--transition);
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(0, 165, 168, 0.2);
+}
+
+.form-control.error {
+  border-color: var(--secondary);
+}
+
+.error-message {
+  color: var(--secondary);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: none;
+}
+
+.card-element-container {
+  padding: 1rem;
+  border: 1px solid var(--grey);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+}
+
+.terms-checkbox {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.terms-checkbox input {
+  margin-right: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.terms-checkbox label {
+  font-weight: normal;
+  margin-bottom: 0;
+  color: var(--neutral-dark);
+}
+
+.terms-checkbox a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.terms-checkbox a:hover {
+  text-decoration: underline;
+}
+
+.btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--gradient-pink-orange);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn:hover {
+  background: linear-gradient(to right, #e63b94, #FFB732);
+  transform: translateY(-2px);
+}
+
+.btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.security-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1.5rem;
+  color: var(--neutral-dark);
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.security-info i {
+  margin-right: 0.5rem;
+  color: var(--primary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .payment-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .payment-header h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .payment-header {
+    padding: 1rem 0;
+  }
+  
+  .payment-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .order-summary, .payment-form {
+    padding: 1.5rem;
+  }
+  
+  .btn {
+    padding: 0.8rem;
+  }
+}
+
+/* Simplified Pricing Options Styles */
+.pricing-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pricing-option {
+  background-color: var(--white);
+  border: 1px solid var(--grey);
+  border-radius: 8px;
+  padding: 1.5rem;
+  cursor: pointer;
+}
+
+.pricing-option.active {
+  border: 2px solid var(--primary);
+  background-color: rgba(0, 165, 168, 0.05);
+}
+
+.pricing-option h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.pricing-option .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+.pricing-option .price .billing-period {
+  font-size: 0.9rem;
+  font-weight: normal;
+  color: var(--neutral-dark);
+  opacity: 0.8;
+}
+
+.pricing-option .features {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0 0 0;
+  font-size: 0.9rem;
+  color: var(--neutral-dark);
+}
+
+.pricing-option .features li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+  line-height: 1.4;
+}
+
+.pricing-option .features li:before {
+  content: "✓";
+  color: var(--primary);
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+/* Responsive design */
+@media (min-width: 768px) {
+  .pricing-options {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .pricing-option[data-plan="professional"] {
+    border: 2px solid var(--primary);
+  }
+}
+
+@media (max-width: 767px) {
+  .pricing-option {
+    padding: 1.2rem;
+  }
+}
+  </style>
+</head>
+<body>
+  
+  <!-- Header -->
+  <header id="navbar">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <img src="image/log.png" alt="Vendoora Logo" data-key="logoAlt">
+        </a>
+        
+        <nav class="nav-center" id="nav">
+          <a href="index.html" data-key="navHome">Home</a>
+          
+          <!-- E-Commerce Dropdown - Fixed -->
+          <div class="dropdown">
+            <a class="dropdown-toggle" data-key="navEcommerce">
+              E-Commerce  
+              <span style="background: #ff4757; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;" data-key="navNew">NEW</span> 
+              <i class="fas fa-chevron-down" style="margin-left: 6px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="Online Store Builder.html" data-key="navStoreBuilder">Online Store Builder</a>
+              <a href="Training Coming Soon.html" data-key="navTraining">Online Training - Coming Soon</a>
+            </div>
+          </div>
+          <a href="Pricing.html" data-key="navPricing">Pricing</a>
+          <a href="Tools AI.html" data-key="navToolsAI">Tools AI</a>
+          <a href="Blog.html" data-key="navBlog">Blog</a>
+          <a href="About us.html" data-key="navAbout">About us</a>
+          <div class="mobile-buttons">
+            <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+          </div>
+        </nav>
+        
+        <div class="header-right">
+          <a href="form.html" class="login-btn" data-key="loginButton">Login</a>
+          
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-btn" id="langBtn">
+              <i class="fas fa-globe"></i>
+              <span id="currentLang" data-key="currentLanguage">English</span>
+              <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+            </button>
+            <div class="lang-dropdown-menu">
+              <a href="#" class="lang-option" data-lang="ar">
+                <span class="lang-flag">🇸🇦</span>
+                <span data-key="langArabic">العربية</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="en">
+                <span class="lang-flag">🇺🇸</span>
+                <span data-key="langEnglish">English</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="fr">
+                <span class="lang-flag">🇫🇷</span>
+                <span data-key="langFrench">Français</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="tr">
+                <span class="lang-flag">🇹🇷</span>
+                <span data-key="langTurkish">Türkçe</span>
+              </a>
+            </div>
+          </div>
+          
+          <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMenu()" data-key="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- Payment Header -->
+<div class="container">
+    <div class="payment-header">
+      <h1>Secure Payment</h1>
+      <p>Complete your purchase with our secure payment gateway</p>
+    </div>
+    
+    <div class="payment-container">
+   <!-- Replace the existing Order Summary section with this code -->
+<div class="order-summary">
+  <h2>Select Your Plan</h2>
+  
+  <!-- Pricing Options -->
+  <div class="pricing-options">
+    <div class="pricing-option active" data-plan="basic" data-price="19.00">
+      <h3>Basic Plan</h3>
+      <div class="price">$19.00<span class="billing-period">/month</span></div>
+      <ul class="features">
+        <li>Up to 100 products</li>
+        <li>Basic analytics</li>
+        <li>Email support</li>
+      </ul>
+    </div>
+    
+    <div class="pricing-option" data-plan="professional" data-price="29.00">
+      <h3>Professional Plan</h3>
+      <div class="price">$29.00<span class="billing-period">/month</span></div>
+      <ul class="features">
+        <li>Up to 500 products</li>
+        <li>Advanced analytics</li>
+        <li>Priority support</li>
+      </ul>
+    </div>
+    
+    <div class="pricing-option" data-plan="enterprise" data-price="49.00">
+      <h3>Enterprise Plan</h3>
+      <div class="price">$49.00<span class="billing-period">/month</span></div>
+      <ul class="features">
+        <li>Unlimited products</li>
+        <li>Advanced analytics</li>
+        <li>24/7 dedicated support</li>
+      </ul>
+    </div>
+  </div>
+  
+  <h2 style="margin-top: 2rem;">Order Summary</h2>
+  
+  <div class="order-item">
+    <span id="selectedPlan">Professional Plan</span>
+    <span id="planPrice">$29.00</span>
+  </div>
+  
+  <div class="order-item">
+    <span>Tax (10%)</span>
+    <span id="taxAmount">$2.90</span>
+  </div>
+  
+  <div class="order-item">
+    <span>Discount</span>
+    <span>-$0.00</span>
+  </div>
+  
+  <div class="order-item order-total">
+    <span>Total</span>
+    <span id="totalAmount">$31.90</span>
+  </div>
+</div>
+      <!-- Payment Form -->
+      <div class="payment-form">
+        <h2>Payment Details</h2>
+        
+        <form id="paymentForm">
+          <div class="form-group">
+            <label for="cardholderName" class="required">Cardholder Name</label>
+            <input type="text" id="cardholderName" class="form-control" placeholder="Name on card" required>
+            <div class="error-message" id="cardholderNameError"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="required">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="Your email address" required>
+            <div class="error-message" id="emailError"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone" class="required">Phone Number</label>
+            <input type="tel" id="phone" class="form-control" placeholder="+1 (123) 456-7890" required>
+            <div class="error-message" id="phoneError"></div>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="country" class="required">Billing Country</label>
+              <select id="country" class="form-control" required>
+                <option value="">Select Country</option>
+                <option value="US">United States</option>
+                <option value="CA">Canada</option>
+                <option value="GB">United Kingdom</option>
+                <option value="AU">Australia</option>
+                <option value="DE">Germany</option>
+                <option value="FR">France</option>
+                <option value="JP">Japan</option>
+                <option value="PK">Pakistan</option>
+                <!-- Add more countries as needed -->
+              </select>
+              <div class="error-message" id="countryError"></div>
+            </div>
+            
+            <div class="form-group">
+              <label for="promoCode">Promo Code</label>
+              <input type="text" id="promoCode" class="form-control" placeholder="Enter promo code">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="required">Payment Method</label>
+            <div class="card-element-container" id="cardElement">
+              <!-- Stripe Card Element will be inserted here -->
+            </div>
+            <div class="error-message" id="cardError"></div>
+          </div>
+          
+          <div class="terms-checkbox">
+            <input type="checkbox" id="agreeTerms" required>
+            <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+          </div>
+          <div class="error-message" id="termsError"></div>
+          
+          <button type="submit" class="btn" id="submitBtn">
+            Pay $31.90
+          </button>
+          
+          <div class="security-info">
+            <i class="fas fa-lock"></i>
+            <span>Secure SSL encrypted payment</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <!-- Animated Background -->
+    <div class="footer-bg-animation">
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+    </div>
+
+    <div class="footer-content">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Company Section -->
+          <div class="footer-company">
+            <div class="company-header">
+              <div class="logo-container">
+                <div class="logo-icon" data-key="footerLogoIcon">V</div>
+              </div>
+              <a href="index.html" class="company-name" data-key="footerCompanyName">Vendoora</a>
+            </div>
+            <p class="company-description" data-key="footerAbout">
+              Vendoora wants you to spend less time staring at a screen and use more of your time growing your business. Create your online store in minutes with powerful AI tools and seamless integrations.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Facebook" data-key="socialFacebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Twitter" data-key="socialTwitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram" data-key="socialInstagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="LinkedIn" data-key="socialLinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="YouTube" data-key="socialYouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company Links -->
+          <div class="footer-column">
+            <h4 data-key="footerCompany">Company</h4>
+            <ul class="footer-links">
+              <li><a href="index.html" data-key="footerHome">Home Page</a></li>
+              <li><a href="About us.html" data-key="footerAboutUs">About Us</a></li>
+              <li><a href="Online Store Builder.html" data-key="footerEcommerce">E-commerce</a></li>
+              <li><a href="Pricing.html" data-key="footerPricing">Pricing</a></li>
+              <li><a href="Blog.html" data-key="footerBlog">Blog</a></li>
+            </ul>
+          </div>
+
+          <!-- Support Links -->
+          <div class="footer-column">
+            <h4 data-key="footerSupport">Support</h4>
+            <ul class="footer-links">
+              <li><a href="#" data-key="footerCareer">Career</a></li>
+              <li><a href="#" data-key="footerAffiliates">Affiliates</a></li>
+              <li><a href="#" data-key="footerFAQ">FAQ</a></li>
+              <li><a href="#" data-key="footerTerms">Terms</a></li>
+              <li><a href="#" data-key="footerSecurity">Security</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources Links -->
+          <div class="footer-column">
+            <h4 data-key="footerResources">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="Blog.html" data-key="footerBlog2">Blog</a></li>
+              <li><a href="#" data-key="footerHelpCenter">Help Center</a></li>
+              <li><a href="#" data-key="footerMadeWith">Made with Vendoora</a></li>
+              <li><a href="#" data-key="footerTutorials">Tutorials</a></li>
+              <li><a href="#" data-key="footerAPIDocs">API Docs</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact & Newsletter -->
+          <div class="footer-column">
+            <div class="newsletter-section">
+              <h4 data-key="footerContact">Contact Info</h4>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span data-key="footerAddress">Lahore, Punjab, Pakistan</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span data-key="footerEmail">info@vendoora.com</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span data-key="footerPhone">+92 300 1234567</span>
+              </div>
+
+              <h4 style="margin-top: 2rem;" data-key="footerNewsletter">Newsletter</h4>
+              <p class="newsletter-description" data-key="footerNewsletterDesc">
+                Subscribe to our newsletter for the latest updates and special offers.
+              </p>
+              <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required data-key="footerNewsletterInput">
+                <button type="submit" class="newsletter-btn" aria-label="Subscribe" data-key="footerNewsletterBtn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p data-key="footerCopyright">Copyright © Vendoora 2025 - All Rights Reserved</p>
+          <p data-key="footerCredit">Coding with <i class="fas fa-heart heart"></i> by <span class="designer" data-key="footerDesigner">Zouraiz</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Stripe.js for payment processing -->
+  <script src="https://js.stripe.com/v3/"></script>
+  
+  <script src="js/menu.js"></script>
+  <script src="js/lang-switcher.js"></script>
+  <script src="js/script.js"></script>
+  
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Stripe with your publishable key
+      const stripe = Stripe('pk_test_your_stripe_public_key');
+      const elements = stripe.elements();
+      
+      // Create and mount the card element
+      const card = elements.create('card', {
+        style: {
+          base: {
+            fontSize: '16px',
+            color: '#32325d',
+            '::placeholder': {
+              color: '#aab7c4'
+            }
+          },
+          invalid: {
+            color: '#fa755a',
+            iconColor: '#fa755a'
+          }
+        }
+      });
+      
+      card.mount('#cardElement');
+      
+      // Handle form submission
+      const form = document.getElementById('paymentForm');
+      const submitBtn = document.getElementById('submitBtn');
+      
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Validate form
+        if (validateForm()) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = 'Processing...';
+          
+          // In a real implementation, you would create a payment intent on your server
+          // and then confirm the card payment with Stripe
+          try {
+            // This is just a demo - in production you would need server-side code
+            const { paymentMethod, error } = await stripe.createPaymentMethod({
+              type: 'card',
+              card: card,
+              billing_details: {
+                name: document.getElementById('cardholderName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                address: {
+                  country: document.getElementById('country').value
+                }
+              }
+            });
+            
+            if (error) {
+              showError('cardError', error.message);
+              submitBtn.disabled = false;
+              submitBtn.textContent = 'Pay $31.90';
+            } else {
+              // In a real app, you would send the paymentMethod.id to your server
+              // Here we'll just simulate a successful payment
+              setTimeout(() => {
+                alert('Payment successful! Thank you for your purchase.');
+                form.reset();
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Pay $31.90';
+                // Redirect to success page
+                // window.location.href = '/success';
+              }, 1500);
+            }
+          } catch (err) {
+            console.error('Error:', err);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Pay $31.90';
+          }
+        }
+      });
+      
+      // Form validation
+      function validateForm() {
+        let isValid = true;
+        
+        // Cardholder name validation
+        const cardholderName = document.getElementById('cardholderName');
+        if (!cardholderName.value.trim()) {
+          showError('cardholderNameError', 'Cardholder name is required');
+          cardholderName.classList.add('error');
+          isValid = false;
+        } else {
+          hideError('cardholderNameError');
+          cardholderName.classList.remove('error');
+        }
+        
+        // Email validation
+        const email = document.getElementById('email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value.trim()) {
+          showError('emailError', 'Email is required');
+          email.classList.add('error');
+          isValid = false;
+        } else if (!emailRegex.test(email.value)) {
+          showError('emailError', 'Please enter a valid email');
+          email.classList.add('error');
+          isValid = false;
+        } else {
+          hideError('emailError');
+          email.classList.remove('error');
+        }
+        
+        // Phone validation
+        const phone = document.getElementById('phone');
+        if (!phone.value.trim()) {
+          showError('phoneError', 'Phone number is required');
+          phone.classList.add('error');
+          isValid = false;
+        } else {
+          hideError('phoneError');
+          phone.classList.remove('error');
+        }
+        
+        // Country validation
+        const country = document.getElementById('country');
+        if (!country.value) {
+          showError('countryError', 'Please select a country');
+          country.classList.add('error');
+          isValid = false;
+        } else {
+          hideError('countryError');
+          country.classList.remove('error');
+        }
+        
+        // Terms checkbox validation
+        const agreeTerms = document.getElementById('agreeTerms');
+        if (!agreeTerms.checked) {
+          showError('termsError', 'You must agree to the terms');
+          isValid = false;
+        } else {
+          hideError('termsError');
+        }
+        
+        return isValid;
+      }
+      
+      function showError(id, message) {
+        const errorElement = document.getElementById(id);
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+      }
+      
+      function hideError(id) {
+        const errorElement = document.getElementById(id);
+        errorElement.style.display = 'none';
+      }
+      
+      // Real-time validation for fields
+      document.getElementById('cardholderName').addEventListener('input', function() {
+        if (this.value.trim()) {
+          hideError('cardholderNameError');
+          this.classList.remove('error');
+        }
+      });
+      
+      document.getElementById('email').addEventListener('input', function() {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (this.value.trim() && emailRegex.test(this.value)) {
+          hideError('emailError');
+          this.classList.remove('error');
+        }
+      });
+      
+      document.getElementById('phone').addEventListener('input', function() {
+        if (this.value.trim()) {
+          hideError('phoneError');
+          this.classList.remove('error');
+        }
+      });
+      
+      document.getElementById('country').addEventListener('change', function() {
+        if (this.value) {
+          hideError('countryError');
+          this.classList.remove('error');
+        }
+      });
+      
+      document.getElementById('agreeTerms').addEventListener('change', function() {
+        if (this.checked) {
+          hideError('termsError');
+        }
+      });
+    });
+
+// Add this to the existing script section
+document.querySelectorAll('.pricing-option').forEach(option => {
+  option.addEventListener('click', function() {
+    // Remove active class from all options
+    document.querySelectorAll('.pricing-option').forEach(opt => {
+      opt.classList.remove('active');
+    });
+    
+    // Add active class to clicked option
+    this.classList.add('active');
+    
+    // Get plan details
+    const planName = this.querySelector('h3').textContent;
+    const planPrice = parseFloat(this.dataset.price);
+    const tax = planPrice * 0.1;
+    const total = planPrice + tax;
+    
+    // Update order summary
+    document.getElementById('selectedPlan').textContent = planName;
+    document.getElementById('planPrice').textContent = `$${planPrice.toFixed(2)}`;
+    document.getElementById('taxAmount').textContent = `$${tax.toFixed(2)}`;
+    document.getElementById('totalAmount').textContent = `$${total.toFixed(2)}`;
+    
+    // Update payment button
+    document.getElementById('submitBtn').textContent = `Pay $${total.toFixed(2)}`;
+  });
+});
+
+    
+  </script>
+</body>
+</html>

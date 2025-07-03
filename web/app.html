@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendoora - Create Your Online Store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+    
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="logo-section">
+            <div style="font-size: 1.8rem; font-weight: 700; color: var(--primary);">Vendoora</div>
+            <button class="preview-store-btn" id="previewStoreBtn">
+                <i class="fas fa-eye"></i>
+                <span>Preview Store</span>
+            </button>
+        </div>
+        
+        <div class="user-menu">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            
+            <div class="lang-dropdown">
+                <button class="lang-btn" id="langBtn">
+                    <i class="fas fa-globe"></i>
+                </button>
+                <div class="lang-dropdown-menu">
+                    <div class="lang-option" data-lang="en">
+                        <span class="lang-flag">🇺🇸</span>
+                        <span>English</span>
+                    </div>
+                    <div class="lang-option" data-lang="ar">
+                        <span class="lang-flag">🇸🇦</span>
+                        <span>العربية</span>
+                    </div>
+                    <div class="lang-option" data-lang="fr">
+                        <span class="lang-flag">🇫🇷</span>
+                        <span>Français</span>
+                    </div>
+                    <div class="lang-option" data-lang="tr">
+                        <span class="lang-flag">🇹🇷</span>
+                        <span>Türkçe</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="user-dropdown">
+                <button class="user-btn">
+                    <div class="user-avatar">J</div>
+                    <span>John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu">
+                    <a href="Account Settings.html">
+                        <i class="fas fa-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <a href="">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                    <a href="#" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Dashboard Container -->
+    <div class="dashboard-container">
+        <!--Sidebar -->
+        <aside class="sidebar">
+            <button class="collapse-btn" id="collapseBtn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            
+            <div class="sidebar-header">
+                <div class="store-name" id="storeNameDisplay">My Store</div>
+            </div>
+            
+            <div class="tool-list">
+                <div class="tool-item active" data-tool="store">
+                    <div class="tool-icon">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <span class="tool-name">Store Setup</span>
+                    <div class="tooltip">Store Setup</div>
+                </div>
+                <div class="tool-item" data-tool="products">
+                    <div class="tool-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <span class="tool-name">Products</span>
+                    <div class="tooltip">Products</div>
+                </div>
+                <div class="tool-item" data-tool="theme">
+                    <div class="tool-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <span class="tool-name">Theme</span>
+                    <div class="tooltip">Theme</div>
+                </div>
+                <div class="tool-item" data-tool="design">
+                    <div class="tool-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <span class="tool-name">Design</span>
+                    <div class="tooltip">Design</div>
+                </div>
+                <div class="tool-item" data-tool="payments">
+                    <div class="tool-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <span class="tool-name">Payments</span>
+                    <div class="tooltip">Payments</div>
+                </div>
+                <div class="tool-item" data-tool="shipping">
+                    <div class="tool-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <span class="tool-name">Shipping</span>
+                    <div class="tooltip">Shipping</div>
+                </div>
+                <div class="tool-item" data-tool="ai">
+                    <div class="tool-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <span class="tool-name">AI Tools</span>
+                    <div class="tooltip">AI Tools</div>
+                </div>
+                <div class="tool-item" data-tool="marketplace">
+                    <div class="tool-icon">
+                        <i class="fas fa-store-alt"></i>
+                    </div>
+                    <span class="tool-name">Marketplace</span>
+                    <div class="tooltip">Marketplace</div>
+                </div>
+                <div class="tool-item" data-tool="settings">
+                    <div class="tool-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <span class="tool-name">Settings</span>
+                    <div class="tooltip">Settings</div>
+                </div>
+                <div class="tool-item" data-tool="help">
+                    <div class="tool-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <span class="tool-name">Help & Support</span>
+                    <div class="tooltip">Help & Support</div>
+                </div>
+            </div>
+        </aside>
+  
+           <!-- Main Content -->
+        <main class="main-content">
+            <section class="welcome-section">
+                <h1 class="welcome-title">Welcome to Vendoora Store Builder</h1>
+                <p>Create your professional online store in minutes. Start selling across Algeria, Turkey, and worldwide with our powerful e-commerce platform.</p>
+            </section>
+            
+            <section class="toolbox-section">
+                <div class="toolbox">
+                    <div class="toolbox-header">
+                        <div class="toolbox-icon">
+                            <i class="fas fa-store"></i>
+                        </div>
+                        <h2 class="toolbox-title">Store Setup</h2>
+                    </div>
+                    
+                    <div class="toolbox-content">
+                        <div class="loading-overlay" id="loadingOverlay">
+                            <div class="spinner"></div>
+                        </div>
+                        
+                        <div class="store-setup-container">
+                            <!-- Step 1: Store Identity -->
+                            <div class="setup-step" id="identityStep">
+                                <div class="setup-step-header">
+                                    <div class="setup-step-title">
+                                        <div class="setup-step-number">1</div>
+                                        <span>Store Identity</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down setup-step-arrow"></i>
+                                </div>
+                                <div class="setup-step-content">
+                                    <div class="form-group">
+                                        <label for="storeName">Store Name*</label>
+                                        <input type="text" id="storeName" class="form-control" placeholder="Your Store Name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="storeSlug">Store URL Slug*</label>
+                                        <input type="text" id="storeSlug" class="form-control" placeholder="your-store-name" required>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="storeDesc">Store Description</label>
+                                        <textarea id="storeDesc" class="form-control" rows="3" placeholder="Briefly describe your store"></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="storeIndustry">Industry</label>
+                                        <select id="storeIndustry" class="form-control">
+                                            <option value="">Select industry</option>
+                                            <option value="fashion">Fashion & Apparel</option>
+                                            <option value="electronics">Electronics</option>
+                                            <option value="home">Home & Garden</option>
+                                            <option value="beauty">Beauty & Cosmetics</option>
+                                            <option value="food">Food & Beverage</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-col">
+                                            <label>Store Logo</label>
+                                            <div class="file-upload" id="logoUpload">
+                                                <i class="fas fa-camera"></i>
+                                                <p>Upload Logo</p>
+                                                <input type="file" class="file-input" accept="image/*">
+                                                <div class="image-preview" id="logoPreview"></div>
+                                            </div>
+                                        </div>
+                                        <div class="form-col">
+                                            <label>Cover Image</label>
+                                            <div class="file-upload" id="coverUpload">
+                                                <i class="fas fa-image"></i>
+                                                <p>Upload Cover</p>
+                                                <input type="file" class="file-input" accept="image/*">
+                                                <div class="image-preview" id="coverPreview"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 2: Navigation Bar -->
+                            <div class="setup-step" id="navStep">
+                                <div class="setup-step-header">
+                                    <div class="setup-step-title">
+                                        <div class="setup-step-number">2</div>
+                                        <span>Navigation Bar</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down setup-step-arrow"></i>
+                                </div>
+                                <div class="setup-step-content">
+                                    <div class="nav-config-group">
+                                        <div class="nav-config-section">
+                                            <h4>Navigation Items</h4>
+                                            <div class="nav-items-manager" id="navItemsManager">
+                                                <!-- Items will be added dynamically -->
+                                            </div>
+                                            <div class="add-nav-item" id="addNavItemBtn">
+                                                <i class="fas fa-plus"></i> Add Navigation Item
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="nav-config-section">
+                                            <h4>Navigation Style</h4>
+                                            <div class="toggle-group">
+                                                <span>Fixed Navigation Bar</span>
+                                                <label class="toggle-switch">
+                                                    <input type="checkbox" id="fixedNav" checked>
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="toggle-group">
+                                                <span>Show Search Bar</span>
+                                                <label class="toggle-switch">
+                                                    <input type="checkbox" id="showSearch" checked>
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="toggle-group">
+                                                <span>Show Cart Icon</span>
+                                                <label class="toggle-switch">
+                                                    <input type="checkbox" id="showCart" checked>
+                                                    <span class="slider"></span>
+                                                </label>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label>Background Color</label>
+                                                <div class="color-picker-wrapper">
+                                                    <input type="color" class="color-input" id="navBgColor" value="#ffffff">
+                                                    <span id="navBgColorValue">#FFFFFF</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="preview-navbar">
+                                        <div class="preview-navbar-logo">
+                                            <i class="fas fa-store"></i>
+                                            <span>My Store</span>
+                                        </div>
+                                        <div class="preview-nav-items" id="previewNavItems">
+                                            <!-- Nav items will be added dynamically -->
+                                        </div>
+                                        <div class="preview-nav-icons">
+                                            <div class="preview-nav-icon"><i class="fas fa-search"></i></div>
+                                            <div class="preview-nav-icon"><i class="fas fa-shopping-cart"></i></div>
+                                            <div class="preview-nav-icon"><i class="fas fa-user"></i></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mobile-preview-toggle">
+                                        <button class="preview-btn" id="mobileNavPreviewBtn">
+                                            <i class="fas fa-mobile-alt"></i>
+                                            Show Mobile Preview
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="mobile-nav-preview" style="display: none;">
+                                        <div class="preview-navbar-logo">
+                                            <i class="fas fa-store"></i>
+                                            <span>My Store</span>
+                                        </div>
+                                        <div class="hamburger">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                        <div class="preview-nav-items">
+                                            <a href="#" class="preview-nav-item">
+                                                <i class="fas fa-home"></i>
+                                                <span>Home</span>
+                                            </a>
+                                            <a href="#" class="preview-nav-item">
+                                                <i class="fas fa-box"></i>
+                                                <span>Products</span>
+                                            </a>
+                                            <a href="#" class="preview-nav-item">
+                                                <i class="fas fa-info-circle"></i>
+                                                <span>About</span>
+                                            </a>
+                                            <a href="#" class="preview-nav-item">
+                                                <i class="fas fa-phone"></i>
+                                                <span>Contact</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 3: Home Section -->
+                            <div class="setup-step" id="homeStep">
+                                <div class="setup-step-header">
+                                    <div class="setup-step-title">
+                                        <div class="setup-step-number">3</div>
+                                        <span>Home Section</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down setup-step-arrow"></i>
+                                </div>
+                                <div class="setup-step-content">
+                                    <div class="form-group">
+                                        <label for="heroTitle">Hero Title</label>
+                                        <input type="text" id="heroTitle" class="form-control" placeholder="Serenity Awaits You">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="heroDescription">Hero Description</label>
+                                        <textarea id="heroDescription" class="form-control" rows="2" placeholder="Discover premium spa products for your ultimate relaxation experience"></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="heroImage">Hero Background Image</label>
+                                        <div class="file-upload" id="heroImageUpload">
+                                            <i class="fas fa-image"></i>
+                                            <p>Upload Hero Image</p>
+                                            <input type="file" class="file-input" accept="image/*">
+                                            <div class="image-preview" id="heroImagePreview"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- CTA Button Settings -->
+                                    <div class="form-group">
+                                        <label>Call-to-Action Button</label>
+                                        <div class="form-row">
+                                            <div class="form-col">
+                                                <input type="text" id="ctaText" class="form-control" placeholder="Button Text" value="Shop Now">
+                                            </div>
+                                            <div class="form-col">
+                                                <div class="color-picker-wrapper">
+                                                    <label>Button Color</label>
+                                                    <input type="color" class="color-input" id="ctaBgColor" value="#d32b84">
+                                                </div>
+                                            </div>
+                                            <div class="form-col">
+                                                <div class="color-picker-wrapper">
+                                                    <label>Text Color</label>
+                                                    <input type="color" class="color-input" id="ctaTextColor" value="#ffffff">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="ctaSize">Button Size</label>
+                                            <select id="ctaSize" class="form-control">
+                                                <option value="small">Small</option>
+                                                <option value="medium" selected>Medium</option>
+                                                <option value="large">Large</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="storeCurrency">Default Currency*</label>
+                                        <select id="storeCurrency" class="form-control" required>
+                                            <option value="">Select currency</option>
+                                            <option value="USD">USD - US Dollar</option>
+                                            <option value="DZD">DZD - Algerian Dinar</option>
+                                            <option value="TRY">TRY - Turkish Lira</option>
+                                            <option value="EUR">EUR - Euro</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="storeLanguage">Store Language*</label>
+                                        <select id="storeLanguage" class="form-control" required>
+                                            <option value="">Select language</option>
+                                            <option value="en">English</option>
+                                            <option value="ar">Arabic</option>
+                                            <option value="fr">French</option>
+                                            <option value="tr">Turkish</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 4: Products Section -->
+                            <div class="setup-step" id="productsStep">
+                                <div class="setup-step-header">
+                                    <div class="setup-step-title">
+                                        <div class="setup-step-number">4</div>
+                                        <span>Products Section</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down setup-step-arrow"></i>
+                                </div>
+                                <div class="setup-step-content">
+                                    <div class="form-group">
+                                        <label>Product Display Settings</label>
+                                        <div class="form-toggle">
+                                            <label for="showPrices">Show Prices</label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="showPrices" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-toggle">
+                                            <label for="showRatings">Show Ratings</label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="showRatings" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-toggle">
+                                            <label for="showCategories">Show Categories</label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="showCategories" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="productsPerRow">Products Per Row</label>
+                                            <select id="productsPerRow" class="form-control">
+                                                <option value="3">3 Products</option>
+                                                <option value="4" selected>4 Products</option>
+                                                <option value="5">5 Products</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <button class="btn btn-outline" id="addProductBtn">
+                                            <i class="fas fa-plus"></i> Add New Product
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="products-manager" id="productsManager">
+                                        <!-- Products will be added dynamically -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 5: About Section -->
+                            <div class="setup-step" id="aboutStep">
+                                <div class="setup-step-header">
+                                    <div class="setup-step-title">
+                                        <div class="setup-step-number">5</div>
+                                        <span>About Section</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down setup-step-arrow"></i>
+                                </div>
+                                <div class="setup-step-content">
+                                    <div class="form-group">
+                                        <label for="aboutTitle">Section Title</label>
+                                        <input type="text" id="aboutTitle" class="form-control" placeholder="Our Philosophy">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="aboutContent">Content</label>
+                                        <textarea id="aboutContent" class="form-control" rows="6" placeholder="Tell your story..."></textarea>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>About Image</label>
+                                        <div class="file-upload" id="aboutImageUpload">
+                                            <i class="fas fa-camera"></i>
+                                            <p>Upload About Image</p>
+                                            <input type="file" class="file-input" accept="image/*">
+                                            <div class="image-preview" id="aboutImagePreview"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Formatting Options -->
+                                    <div class="form-group">
+                                        <label>Formatting Options</label>
+                                        <div class="form-row">
+                                            <div class="form-col">
+                                                <label for="textAlign">Text Alignment</label>
+                                                <select id="textAlign" class="form-control">
+                                                    <option value="left">Left</option>
+                                                    <option value="center">Center</option>
+                                                    <option value="right">Right</option>
+                                                    <option value="justify">Justify</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-col">
+                                                <label for="fontFamily">Font Family</label>
+                                                <select id="fontFamily" class="form-control">
+                                                    <option value="Arial, sans-serif">Arial</option>
+                                                    <option value="Georgia, serif">Georgia</option>
+                                                    <option value="'Courier New', monospace">Courier New</option>
+                                                    <option value="'Times New Roman', serif">Times New Roman</option>
+                                                    <option value="'Segoe UI', Tahoma, sans-serif">Segoe UI</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-col">
+                                                <div class="color-picker-wrapper">
+                                                    <label>Text Color</label>
+                                                    <input type="color" class="color-input" id="textColor" value="#333333">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Step 6: Footer Section -->
+                            <div class="setup-step" id="footerStep">
+                                <div class="setup-step-header">
+                                    <div class="setup-step-title">
+                                        <div class="setup-step-number">6</div>
+                                        <span>Footer Section</span>
+                                    </div>
+                                    <i class="fas fa-chevron-down setup-step-arrow"></i>
+                                </div>
+                                <div class="setup-step-content">
+                                    <div class="form-group">
+                                        <label for="footerCopyright">Copyright Text</label>
+                                        <input type="text" id="footerCopyright" class="form-control" placeholder="© 2023 Your Store Name">
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label>Footer Links</label>
+                                        <div class="form-toggle">
+                                            <label for="showContact">Show Contact Info</label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="showContact" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-toggle">
+                                            <label for="showSocial">Show Social Media</label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="showSocial" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-toggle">
+                                            <label for="showQuickLinks">Show Quick Links</label>
+                                            <label class="toggle-switch">
+                                                <input type="checkbox" id="showQuickLinks" checked>
+                                                <span class="slider"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Social Media Links -->
+                                    <div class="form-group">
+                                        <label>Social Media Links</label>
+                                        <div class="form-group">
+                                            <label for="facebookUrl">Facebook</label>
+                                            <input type="url" id="facebookUrl" class="form-control" placeholder="https://facebook.com/yourpage">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="instagramUrl">Instagram</label>
+                                            <input type="url" id="instagramUrl" class="form-control" placeholder="https://instagram.com/yourpage">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="gmailUrl">Gmail</label>
+                                            <input type="email" id="gmailUrl" class="form-control" placeholder="yourstore@gmail.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tiktokUrl">TikTok</label>
+                                            <input type="url" id="tiktokUrl" class="form-control" placeholder="https://tiktok.com/@yourpage">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="telegramUrl">Telegram</label>
+                                            <input type="url" id="telegramUrl" class="form-control" placeholder="https://t.me/yourchannel">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="youtubeUrl">YouTube</label>
+                                            <input type="url" id="youtubeUrl" class="form-control" placeholder="https://youtube.com/yourchannel">
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Quick Links -->
+                                    <div class="form-group">
+                                        <label>Quick Links</label>
+                                        <div id="quickLinksManager">
+                                            <!-- Quick links will be added dynamically -->
+                                        </div>
+                                        <button class="btn btn-outline" id="addQuickLinkBtn" style="margin-top: 10px;">
+                                            <i class="fas fa-plus"></i> Add Quick Link
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary" id="saveStoreBtn">
+                                <i class="fas fa-save"></i> Save & Publish Store
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="preview-container">
+                    <div class="preview-header">
+                        <h2 class="preview-title">Store Preview</h2>
+                        <div class="preview-actions">
+                            <button class="preview-btn active" id="desktopPreview">
+                                <i class="fas fa-desktop"></i> Desktop
+                            </button>
+                            <button class="preview-btn" id="mobilePreview">
+                                <i class="fas fa-mobile-alt"></i> Mobile
+                            </button>
+                            <button class="preview-btn" id="refreshPreview">
+                                <i class="fas fa-sync-alt"></i> Refresh
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="preview-loading" id="previewLoading">
+                        <div class="spinner"></div>
+                        <div class="preview-loading-text">Generating Preview...</div>
+                    </div>
+                    
+                    <div class="preview-content" id="previewContent">
+                        <div class="store-preview" id="storePreview">
+                            <!-- Preview will be rendered here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Product Modal Template -->
+    <div class="modal-overlay" id="productModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Product</h3>
+                <button class="close-modal" id="closeProductModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="productName">Product Name*</label>
+                    <input type="text" id="productName" class="form-control" placeholder="Enter product name" required>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Price*</label>
+                    <input type="number" id="productPrice" class="form-control" placeholder="0.00" min="0" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Description</label>
+                    <textarea id="productDescription" class="form-control" rows="3" placeholder="Product description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Category</label>
+                    <input type="text" id="productCategory" class="form-control" placeholder="Product category">
+                </div>
+                <div class="form-group">
+                    <label>Product Image</label>
+                    <div class="file-upload" id="productImageUpload">
+                        <i class="fas fa-camera"></i>
+                        <p>Upload Product Image</p>
+                        <input type="file" class="file-input" accept="image/*">
+                        <div class="image-preview" id="productImagePreview"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-outline" id="cancelProductBtn">Cancel</button>
+                <button class="btn btn-primary" id="saveProductBtn">Save Product</button>
+            </div>
+        </div>
+    </div>
+    
+
+  
+    <script src="js/app.js"></script>
+</body>
+</html>
+
+
+
+

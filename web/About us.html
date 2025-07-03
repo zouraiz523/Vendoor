@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Contact Us - Vendoora</title>
+  <meta name="description" content="Learn about Vendoora's mission to simplify e-commerce. Contact our team for support or partnership inquiries.">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* About Us Specific Styles */
+    .about-hero {
+      background: linear-gradient(135deg, #f0f9f9 0%, #e0f4f4 100%);
+      padding: 6rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(to right, var(--primary), var(--primary-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .about-hero p {
+      font-size: 1.2rem;
+      color: var(--neutral-dark);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .about-container {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .section-title .divider {
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    .mission-vision {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin: 4rem 0;
+    }
+
+    .mission-card, .vision-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .mission-card.animated, .vision-card.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mission-card:hover, .vision-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(154, 126, 230, 0.1);
+    }
+
+    .mission-card::before, .vision-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .mission-card h3, .vision-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mission-card h3 i, .vision-card h3 i {
+      width: 50px;
+      height: 50px;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .team-member {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .team-member.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 165, 168, 0.1);
+    }
+
+    .member-image {
+      height: 250px;
+      overflow: hidden;
+    }
+
+    .member-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .team-member:hover .member-image img {
+      transform: scale(1.1);
+    }
+
+    .member-info {
+      padding: 1.8rem;
+      text-align: center;
+    }
+
+    .member-name {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--neutral-dark);
+    }
+
+    .member-position {
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .member-bio {
+      color: var(--neutral-dark);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 4rem;
+      margin-top: 4rem;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .contacts-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+
+    .contact-details h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--neutral-dark);
+    }
+
+    .contact-details p, .contact-details a {
+      color: var(--neutral-dark);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .contact-details a:hover {
+      color: var(--primary);
+    }
+
+    .contact-form {
+      background: var(--neutral-light);
+      padding: 2.5rem;
+      border-radius: var(--radius);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--neutral-dark);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-family: 'Poppins', sans-serif;
+      transition: var(--transition);
+      background: white;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(0, 165, 168, 0.2);
+      outline: none;
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* Animation Keyframes */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .about-hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .contact-section {
+        padding: 2rem;
+      }
+      
+      .mission-card, .vision-card {
+        padding: 2rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2rem;
+      }
+      
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-hero {
+        padding: 4rem 0 3rem;
+      }
+      
+      .about-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .about-hero p {
+        font-size: 1rem;
+      }
+      
+      .mission-card, .vision-card {
+        padding: 1.5rem;
+      }
+      
+      .contact-section {
+        padding: 1.5rem;
+      }
+      
+      .contact-form {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+   <!-- Header - Same as index.html -->
+  <header id="navbar">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <img src="image/log.png" alt="Vendoora Logo" data-key="logoAlt">
+        </a>
+        
+        <nav class="nav-center" id="nav">
+          <a href="index.html" data-key="navHome">Home</a>
+          
+          <!-- E-Commerce Dropdown -->
+          <div class="dropdown">
+            <a class="dropdown-toggle" data-key="navEcommerce">
+              E-Commerce  
+              <span style="background: #ff4757; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;" data-key="navNew">NEW</span> 
+              <i class="fas fa-chevron-down" style="margin-left: 6px;"></i>
+            </a>
+
+            <div class="dropdown-menu">
+              <a href="Online Store Builder.html" data-key="navStoreBuilder">Online Store Builder</a>
+              <a href="Training Coming Soon.html" data-key="navTraining">Online Training – Coming Soon</a>
+            </div>
+          </div>
+
+          <a href="Pricing.html" data-key="navPricing">Pricing</a>
+          <a href="Tools AI.html" data-key="navToolsAI">Tools AI</a>
+          <a href="Blog.html" data-key="navBlog">Blog</a>
+          <a href="About us.html" data-key="navAbout">About us</a>
+          
+          <div class="mobile-buttons">
+            <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+          </div>
+        </nav>
+        
+        <div class="header-right">
+          <a href="form.html" class="login-btn" data-key="loginButton">Login</a>
+          
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-btn" id="langBtn">
+              <i class="fas fa-globe"></i>
+              <span id="currentLang" data-key="currentLanguage">English</span>
+              <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+            </button>
+            <div class="lang-dropdown-menu">
+              <a href="#" class="lang-option" data-lang="ar">
+                <span class="lang-flag">🇸🇦</span>
+                <span data-key="langArabic">العربية</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="en">
+                <span class="lang-flag">🇺🇸</span>
+                <span data-key="langEnglish">English</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="fr">
+                <span class="lang-flag">🇫🇷</span>
+                <span data-key="langFrench">Français</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="tr">
+                <span class="lang-flag">🇹🇷</span>
+                <span data-key="langTurkish">Türkçe</span>
+              </a>
+            </div>
+          </div>
+          
+          <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMenu()" data-key="menuToggle">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Hero Section -->
+  <section class="about-hero">
+    <div class="container">
+      <h1 data-key="aboutHeroTitle">About Vendoora</h1>
+      <p data-key="aboutHeroDesc">We're on a mission to democratize e-commerce by making it accessible to everyone, regardless of technical skills or budget.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-primary" data-key="contactButton">
+          <i class="fas fa-envelope"></i>
+          <span data-key="contactButtonText">Contact Our Team</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Content -->
+  <section class="about-container">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-key="ourStoryTitle">Our Story</h2>
+        <div class="divider"></div>
+      </div>
+      
+      <div class="story-content">
+        <p data-key="ourStoryDesc" style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2rem; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Founded in 2025 by a team of e-commerce enthusiasts and tech experts, Vendoora was born out of frustration with the complexity of existing online store solutions. We saw talented entrepreneurs struggling with technical barriers and decided to build a platform that puts the power back in their hands.
+        </p>
+        
+        <div class="mission-vision">
+          <div class="mission-card">
+            <h3 data-key="missionTitle">
+              <i class="fas fa-bullseye"></i>
+              <span>Our Mission</span>
+            </h3>
+            <p data-key="missionDesc">To empower Turkish entrepreneurs and small businesses with intuitive tools that remove technical barriers, allowing them to focus on what they do best - growing their business and serving their customers.</p>
+          </div>
+          
+          <div class="vision-card">
+            <h3 data-key="visionTitle">
+              <i class="fas fa-eye"></i>
+              <span>Our Vision</span>
+            </h3>
+            <p data-key="visionDesc">To become the leading e-commerce platform in Turkey by providing localized solutions that understand and address the unique challenges faced by Turkish businesses.</p>
+          </div>
+        </div>
+        
+        <div class="section-title" style="margin-top: 6rem;">
+          <h2 data-key="teamTitle">Meet Our Team</h2>
+          <div class="divider"></div>
+          <p data-key="teamSubtitle" style="font-size: 1.1rem; color: var(--neutral-dark); max-width: 700px; margin: 1rem auto 0;">
+            The brilliant minds behind Vendoora who work tirelessly to make your e-commerce journey seamless
+          </p>
+        </div>
+        
+        <div class="team-grid">
+          <div class="team-member">
+            <div class="member-image">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="CEO" data-key="ceoImageAlt">
+            </div>
+            <div class="member-info">
+              <h3 class="member-name" data-key="ceoName">Mehmet Yılmaz</h3>
+              <p class="member-position" data-key="ceoPosition">CEO & Founder</p>
+              <p class="member-bio" data-key="ceoBio">With 10+ years in e-commerce, Mehmet leads our strategic vision to make Vendoora the most user-friendly platform for Turkish businesses.</p>
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="CTO" data-key="ctoImageAlt">
+            </div>
+            <div class="member-info">
+              <h3 class="member-name" data-key="ctoName">Zouraiz Ahmed</h3>
+              <p class="member-position" data-key="ctoPosition">CTO & Lead Developer</p>
+              <p class="member-bio" data-key="ctoBio">Our tech wizard who ensures Vendoora's platform remains cutting-edge while being incredibly easy to use for our Turkish clients.</p>
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link" aria-label="Code"><i class="fas fa-code"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="CMO" data-key="cmoImageAlt">
+            </div>
+            <div class="member-info">
+              <h3 class="member-name" data-key="cmoName">Ayşe Demir</h3>
+              <p class="member-position" data-key="cmoPosition">CMO</p>
+              <p class="member-bio" data-key="cmoBio">Ayşe crafts our message to ensure Vendoora reaches every entrepreneur in Turkey who could benefit from our platform.</p>
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="team-member">
+            <div class="member-image">
+              <img src="https://images.unsplash.com/photo-1562788869-4ed32648eb72?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Support Lead" data-key="supportImageAlt">
+            </div>
+            <div class="member-info">
+              <h3 class="member-name" data-key="supportName">Emre Şahin</h3>
+              <p class="member-position" data-key="supportPosition">Customer Support Lead</p>
+              <p class="member-bio" data-key="supportBio">Emre ensures every Vendoora user in Turkey gets the help they need to succeed with their online store.</p>
+              <div class="social-links">
+                <a href="#" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="social-link" aria-label="Support"><i class="fas fa-headset"></i></a>
+                <a href="#" class="social-link" aria-label="Help"><i class="fas fa-hands-helping"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-key="contactTitle">Get In Touch</h2>
+        <div class="divider"></div>
+        <p data-key="contactSubtitle" style="font-size: 1.1rem; color: var(--neutral-dark); max-width: 700px; margin: 1rem auto 0;">
+          Have questions or want to partner with us? We'd love to hear from you!
+        </p>
+      </div>
+      
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="contact-card">
+            <div class="contacts-icon">
+              <i class="fas fa-location-dot"></i>
+            </div>
+            <div class="contact-details">
+              <h4 data-key="officeTitle">Our Office</h4>
+              <p data-key="officeAddress">Maslak Mahallesi, Ahi Evran Caddesi No:4<br>
+              Maslak 34485, İstanbul, Turkey</p>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contacts-icon">
+              <i class="fas fa-mobile-screen-button"></i>
+            </div>
+            <div class="contact-details">
+              <h4 data-key="callUsTitle">Call Us</h4>
+              <p>
+                <a href="tel:+902123456789" data-key="phone1">+90 212 345 67 89</a><br>
+                <a href="tel:+905551234567" data-key="phone2">+90 555 123 45 67</a>
+              </p>
+            </div>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contacts-icon">
+              <i class="fas fa-business-time"></i>
+            </div>
+            <div class="contact-details">
+              <h4 data-key="hoursTitle">Working Hours</h4>
+              <p data-key="hoursDetail">
+                Monday - Friday: 9:00 - 18:00<br>
+                Saturday: 10:00 - 16:00<br>
+                Sunday: Closed
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="contact-form">
+          <form id="contactForm">
+            <div class="form-group">
+              <label for="name" data-key="formNameLabel">Your Name</label>
+              <input type="text" id="name" class="form-control" placeholder="Enter your name" data-key="formNamePlaceholder" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="email" data-key="formEmailLabel">Email Address</label>
+              <input type="email" id="email" class="form-control" placeholder="Enter your email" data-key="formEmailPlaceholder" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="subject" data-key="formSubjectLabel">Subject</label>
+              <input type="text" id="subject" class="form-control" placeholder="What's this about?" data-key="formSubjectPlaceholder" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="message" data-key="formMessageLabel">Your Message</label>
+              <textarea id="message" class="form-control" placeholder="Type your message here..." data-key="formMessagePlaceholder" required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem; font-size: 1.1rem;" data-key="formSubmitButton">
+              <i class="fas fa-send"></i>
+              <span>Send Message</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Footer -->
+  <footer>
+    <!-- Animated Background -->
+    <div class="footer-bg-animation">
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+    </div>
+
+    <div class="footer-content">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Company Section -->
+          <div class="footer-company">
+            <div class="company-header">
+              <div class="logo-container">
+                <div class="logo-icon" data-key="footerLogoIcon">V</div>
+              </div>
+              <a href="index.html" class="company-name" data-key="footerCompanyName">Vendoora</a>
+            </div>
+            <p class="company-description" data-key="footerAbout">
+              Vendoora wants you to spend less time staring at a screen and use more of your time growing your business. Create your online store in minutes with powerful AI tools and seamless integrations.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Facebook" data-key="socialFacebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Twitter" data-key="socialTwitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram" data-key="socialInstagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="LinkedIn" data-key="socialLinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="YouTube" data-key="socialYouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company Links -->
+          <div class="footer-column">
+            <h4 data-key="footerCompany">Company</h4>
+            <ul class="footer-links">
+              <li><a href="index.html" data-key="footerHome">Home Page</a></li>
+              <li><a href="About us.html" data-key="footerAboutUs">About Us</a></li>
+              <li><a href="Online Store Builder.html" data-key="footerEcommerce">E-commerce</a></li>
+              <li><a href="Pricing.html" data-key="footerPricing">Pricing</a></li>
+              <li><a href="Blog.html" data-key="footerBlog">Blog</a></li>
+            </ul>
+          </div>
+
+          <!-- Support Links -->
+          <div class="footer-column">
+            <h4 data-key="footerSupport">Support</h4>
+            <ul class="footer-links">
+              <li><a href="#" data-key="footerCareer">Career</a></li>
+              <li><a href="#" data-key="footerAffiliates">Affiliates</a></li>
+              <li><a href="#" data-key="footerFAQ">FAQ</a></li>
+              <li><a href="#" data-key="footerTerms">Terms</a></li>
+              <li><a href="#" data-key="footerSecurity">Security</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources Links -->
+          <div class="footer-column">
+            <h4 data-key="footerResources">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="Blog.html" data-key="footerBlog2">Blog</a></li>
+              <li><a href="#" data-key="footerHelpCenter">Help Center</a></li>
+              <li><a href="#" data-key="footerMadeWith">Made with Vendoora</a></li>
+              <li><a href="#" data-key="footerTutorials">Tutorials</a></li>
+              <li><a href="#" data-key="footerAPIDocs">API Docs</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact & Newsletter -->
+          <div class="footer-column">
+            <div class="newsletter-section">
+              <h4 data-key="footerContact">Contact Info</h4>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span data-key="footerAddress">Lahore, Punjab, Pakistan</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span data-key="footerEmail">info@vendoora.com</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span data-key="footerPhone">+92 300 1234567</span>
+              </div>
+
+              <h4 style="margin-top: 2rem;" data-key="footerNewsletter">Newsletter</h4>
+              <p class="newsletter-description" data-key="footerNewsletterDesc">
+                Subscribe to our newsletter for the latest updates and special offers.
+              </p>
+              <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required data-key="footerNewsletterInput">
+                <button type="submit" class="newsletter-btn" aria-label="Subscribe" data-key="footerNewsletterBtn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p data-key="footerCopyright">Copyright © Vendoora 2025 - All Rights Reserved</p>
+          <p data-key="footerCredit">Coding with <i class="fas fa-heart heart"></i> by <span class="designer" data-key="footerDesigner">Zouraiz</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    
+  <script src="js/menu.js"></script>
+  <script src="js/lang-switcher.js"></script>
+  <script>
+
+
+
+    // Language Switcher Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const langBtn = document.getElementById('langBtn');
+      const langDropdown = document.getElementById('langDropdown');
+      const currentLang = document.getElementById('currentLang');
+      const langOptions = document.querySelectorAll('.lang-option');
+      
+      // Create success message element if it doesn't exist
+      if (!document.getElementById('successMessage')) {
+        const successMessage = document.createElement('div');
+        successMessage.id = 'successMessage';
+        document.body.appendChild(successMessage);
+      }
+      const successMessage = document.getElementById('successMessage');
+      
+      // Toggle dropdown
+      langBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        langDropdown.classList.toggle('active');
+      });
+      
+      // Handle language selection
+      langOptions.forEach(option => {
+        option.addEventListener('click', function(e) {
+          e.preventDefault();
+          const lang = this.getAttribute('data-lang');
+          const langText = this.querySelector('span:last-child').textContent;
+          
+          // Update current language display
+          currentLang.textContent = lang.toUpperCase();
+          langDropdown.classList.remove('active');
+          
+          // Show language change message
+          successMessage.textContent = `Language changed to ${langText}`;
+          successMessage.style.display = 'block';
+          
+          // Save the language preference to localStorage
+          localStorage.setItem('preferredLanguage', lang);
+          
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 3000);
+        });
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', function(e) {
+        if (!langDropdown.contains(e.target)) {
+          langDropdown.classList.remove('active');
+        }
+      });
+      
+      // Check for saved language preference
+      const savedLang = localStorage.getItem('preferredLanguage');
+      if (savedLang) {
+        const langOption = document.querySelector(`.lang-option[data-lang="${savedLang}"]`);
+        if (langOption) {
+          currentLang.textContent = savedLang.toUpperCase();
+        }
+      }
+    });
+
+    // Animation for mission/vision cards and team members
+    const animateElements = () => {
+      const elements = document.querySelectorAll('.mission-card, .vision-card, .team-member');
+      
+      elements.forEach(el => {
+        const elementPosition = el.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
+        
+        if (elementPosition < screenPosition) {
+          el.classList.add('animated');
+        }
+      });
+    };
+    
+    // Initial check
+    animateElements();
+    
+    // Check on scroll
+    window.addEventListener('scroll', animateElements);
+    
+    // Contact form submission
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // Here you would typically send the data to your backend
+        console.log('Contact Form Submission:', { name, email, subject, message });
+        
+        // Show success message
+        alert(`Thank you, ${name}! Your message has been sent. We'll get back to you soon.`);
+        
+        // Reset form
+        contactForm.reset();
+      });
+    }
+    
+    // Newsletter form handler
+    function handleNewsletter(event) {
+      event.preventDefault();
+      const email = event.target.querySelector('.newsletter-input').value;
+      
+      // Add success animation
+      const button = event.target.querySelector('.newsletter-btn');
+      const icon = button.querySelector('i');
+      
+      icon.className = 'fas fa-check';
+      button.style.background = 'var(--primary)';
+      
+      setTimeout(() => {
+        icon.className = 'fas fa-paper-plane';
+        button.style.background = 'var(--primary)';
+        event.target.reset();
+      }, 2000);
+      
+      console.log('Newsletter subscription:', email);
+    }
+
+    // Mobile menu toggle function
+    function toggleMenu() {
+      const nav = document.getElementById('nav');
+      const toggle = document.querySelector('.menu-toggle i');
+      
+      nav.classList.toggle('active');
+      
+      if (nav.classList.contains('active')) {
+        toggle.classList.remove('fa-bars');
+        toggle.classList.add('fa-times');
+      } else {
+        toggle.classList.remove('fa-times');
+        toggle.classList.add('fa-bars');
+      }
+    }
+  </script>
+</body>
+</html>

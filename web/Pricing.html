@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Vendoora pricing plans - Choose the right plan for your business">
+  <title>Pricing - Vendoora</title>
+  <link rel="icon" href="image/log.png" type="image/png">
+ <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>/* Root Variables with Updated Brand Colors */
+/* Root Variables with Updated Brand Colors */
+:root {
+  /* === Brand Colors === */
+  --primary: #00A5A8;              /* Deep Teal - Main buttons, links */
+  --primary-light: #00c4c7;        /* Lighter Teal - Hover states */
+  
+  --secondary: #FF6B6B;            /* Vibrant Coral - Tags, alerts */
+  --secondary-light: #ff8e8e;      /* Light Coral - Hover, backgrounds */
+  
+  --accent: #9A7EE6;               /* Soft Lavender - Headings, icons */
+  /* === Neutral Colors === */
+  --neutral-light: #F7F7F7;        /* Light background */
+  --neutral-dark: #2D3436;         /* Dark text, footer */
+  --white: #FFFFFF;                /* Plain white */
+  --grey: #E0E0E0;                 /* Light gray border */
+  /* === Gradient / Custom Additions === */
+  --pink: #d32b84;                 /* Logo pink */
+  --orange: #FFA500;              /* Accent orange for gradient */
+  --gradient-pink-orange: linear-gradient(to right, #d32b84, #FFA500); /* For buttons/sections */
+  /* === UI Effects === */
+  --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Button/card shadow */
+  --transition: all 0.3s ease;             /* Smooth transition */
+  --radius: 12px;                          /* Rounded corners */
+  
+  /* Legacy variables for compatibility */
+  --text: var(--neutral-dark);
+  --text-light: #666;
+  --bg: var(--neutral-light);
+  --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  --gradient-secondary: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+  --shadow-hover: 0 15px 40px rgba(0, 165, 168, 0.15);
+}
+
+/* Pricing Page Specific Styles */
+.pricing-intro {
+  text-align: center;
+  padding: 4rem 0 2rem;
+  background: linear-gradient(135deg, var(--neutral-light) 0%, #fafafa 100%);
+}
+
+.pricing-intro h1 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.pricing-intro p {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+.pricing-tabs {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 0.5rem;
+  border-radius: 50px;
+  max-width: 400px;
+  margin: 2rem auto;
+  box-shadow: 0 5px 15px rgba(0, 165, 168, 0.08);
+  border: 1px solid rgba(0, 165, 168, 0.1);
+}
+
+.tab-btn {
+  padding: 0.8rem 2rem;
+  border: none;
+  background: none;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.tab-btn.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 165, 168, 0.2);
+  transform: translateY(-1px);
+}
+
+.tab-btn:hover:not(.active) {
+  background: rgba(0, 165, 168, 0.05);
+  color: var(--primary);
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  padding: 2rem 0 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 165, 168, 0.08);
+  text-align: center;
+  overflow: hidden;
+}
+
+.pricing-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.pricing-card:hover::before {
+  transform: scaleX(1);
+}
+
+.pricing-card:hover {
+  transform: translateY(-12px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(0, 165, 168, 0.15);
+}
+
+.pricing-card.popular {
+  border: 2px solid var(--primary);
+  transform: scale(1.05);
+  box-shadow: 0 15px 40px rgba(0, 165, 168, 0.15);
+}
+
+.pricing-card.popular:hover {
+  transform: scale(1.05) translateY(-12px);
+}
+
+.popular-badge {
+  position: absolute;
+  top: -12px;
+  right: 20px;
+  background: var(--gradient-secondary);
+  color: white;
+  padding: 0.6rem 1.8rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pricing-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--neutral-dark);
+  font-weight: 700;
+}
+
+.price {
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin: 1.5rem 0;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.price span {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-light);
+  background: none;
+  -webkit-text-fill-color: var(--text-light);
+}
+
+.pricing-card > p {
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(0, 165, 168, 0.1);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.features-list {
+  list-style: none;
+  text-align: left;
+  margin: 2rem 0;
+  padding: 0;
+}
+
+.features-list li {
+  margin-bottom: 1rem;
+  padding: 0.6rem 0;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.features-list i {
+  margin-right: 1rem;
+  color: var(--primary);
+  background: rgba(0, 165, 168, 0.1);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.pricing-btn {
+  display: inline-block;
+  width: 100%;
+  padding: 1.2rem;
+  border-radius: 50px;
+  background: var(--gradient-pink-orange);
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  margin-top: 1.5rem;
+  font-size: 1rem;
+  letter-spacing: 0.3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.pricing-btn:hover::before {
+  left: 100%;
+}
+
+.pricing-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(211, 43, 132, 0.3);
+}
+
+.pricing-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Popular card button styling */
+.pricing-card.popular .pricing-btn {
+  background: var(--gradient-pink-orange);
+  border-color: transparent;
+  box-shadow: 0 6px 20px rgba(211, 43, 132, 0.3);
+}
+
+.pricing-card.popular .pricing-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  box-shadow: 0 8px 25px rgba(0, 165, 168, 0.4);
+}
+
+.faq-section {
+  padding: 4rem 0;
+  background: var(--neutral-light);
+}
+
+.faq-section h2 {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.5rem;
+  color: var(--neutral-dark);
+  font-weight: 700;
+}
+
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 1.2rem;
+  box-shadow: 0 5px 15px rgba(0, 165, 168, 0.05);
+  overflow: hidden;
+  border: 1px solid rgba(0, 165, 168, 0.05);
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  box-shadow: 0 8px 25px rgba(0, 165, 168, 0.1);
+  border-color: rgba(0, 165, 168, 0.1);
+}
+
+.faq-question {
+  padding: 1.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  color: var(--neutral-dark);
+  font-size: 1.05rem;
+}
+
+.faq-question:hover {
+  color: var(--primary);
+  background: rgba(0, 165, 168, 0.02);
+}
+
+.faq-answer {
+  padding: 0 1.8rem;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+  padding: 0 1.8rem 1.8rem;
+  max-height: 500px;
+}
+
+.faq-toggle {
+  transition: transform 0.3s ease;
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.faq-item.active .faq-toggle {
+  transform: rotate(180deg);
+}
+
+.faq-item.active .faq-question {
+  color: var(--primary);
+  background: rgba(0, 165, 168, 0.03);
+}
+
+/* CTA Section Styling */
+.cta {
+  padding: 4rem 0;
+  background: var(--gradient-pink-orange);
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.cta p {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1.2rem 2.5rem;
+  background: white;
+  color: var(--pink);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 2px solid white;
+}
+
+.cta-button:hover {
+  background: transparent;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.cta-button i {
+  font-size: 1.1rem;
+}
+
+/* Floating elements for visual interest */
+.cta::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+.cta::after {
+  content: "";
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+/* Section Title Styling */
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--neutral-dark);
+  font-weight: 700;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--gradient-secondary);
+  border-radius: 2px;
+}
+
+/* Header Overrides */
+.cta-btn {
+  background: var(--gradient-pink-orange) !important;
+  border-color: transparent !important;
+}
+
+.cta-btn:hover {
+  background: var(--primary) !important;
+  border-color: var(--primary) !important;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .pricing-intro h1 {
+    font-size: 2.2rem;
+  }
+  
+  .pricing-intro p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+  
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    gap: 2rem;
+  }
+  
+  .pricing-card.popular {
+    transform: none;
+  }
+  
+  .pricing-card.popular:hover {
+    transform: translateY(-8px);
+  }
+  
+  .faq-question {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .faq-answer {
+    padding: 0 1.5rem;
+  }
+  
+  .faq-item.active .faq-answer {
+    padding: 0 1.5rem 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .pricing-intro h1 {
+    font-size: 1.8rem;
+  }
+  
+  .tab-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.85rem;
+  }
+  
+  .pricing-card {
+    padding: 2rem;
+  }
+  
+  .price {
+    font-size: 2.8rem;
+  }
+  
+  .pricing-btn {
+    padding: 1rem;
+    font-size: 0.95rem;
+  }
+  
+  .popular-badge {
+    font-size: 0.75rem;
+    padding: 0.5rem 1.2rem;
+  }
+  
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .cta h2 {
+    font-size: 1.8rem;
+  }
+  
+  .cta p {
+    font-size: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+/* Animation Enhancements */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.pricing-card {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.pricing-card:nth-child(1) { animation-delay: 0.1s; }
+.pricing-card:nth-child(2) { animation-delay: 0.2s; }
+.pricing-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* Accessibility Improvements */
+.pricing-btn:focus,
+.tab-btn:focus,
+.faq-question:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.pricing-card:focus-within {
+  box-shadow: 0 0 0 3px rgba(0, 165, 168, 0.1);
+}
+
+/* Print Styles */
+@media print {
+  .pricing-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+    break-inside: avoid;
+  }
+  
+  .pricing-btn {
+    background: white !important;
+    color: var(--primary) !important;
+    border: 2px solid var(--primary) !important;
+  }
+}
+  </style>
+</head>
+<body>
+ 
+     <!-- Header -->
+  <header id="navbar">
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <img src="image/log.png" alt="Vendoora Logo">
+        </a>
+        
+        <nav class="nav-center" id="nav">
+          <a href="index.html" data-key="navHome">Home</a>
+          
+          <!-- E-Commerce Dropdown - Fixed -->
+          <div class="dropdown">
+            <a class="dropdown-toggle" data-key="navEcommerce">
+              E-Commerce  
+              <span style="background: #ff4757; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; margin-left: 4px;" data-key="navNew">NEW</span> 
+              <i class="fas fa-chevron-down" style="margin-left: 6px;"></i>
+            </a>
+            <div class="dropdown-menu">
+              <a href="Online Store Builder.html" data-key="navStoreBuilder">Online Store Builder</a>
+              <a href="Training Coming Soon.html" data-key="navTraining">Online Training – Coming Soon</a>
+            </div>
+          </div>
+          <a href="Pricing.html" data-key="navPricing">Pricing</a>
+          <a href="Tools AI.html" data-key="navToolsAI">Tools AI</a>
+          <a href="Blog.html" data-key="navBlog">Blog</a>
+          <a href="About us.html" data-key="navAbout">About us</a>
+          <div class="mobile-buttons">
+            <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+          </div>
+        </nav>
+        
+
+        <div class="header-right">
+          <a href="form.html" class="login-btn" data-key="loginButton">Login</a>
+          
+          <div class="lang-dropdown" id="langDropdown">
+            <button class="lang-btn" id="langBtn">
+              <i class="fas fa-globe"></i>
+              <span id="currentLang">عربي</span>
+              <i class="fas fa-chevron-down" style="font-size: 12px;"></i>
+            </button>
+            <div class="lang-dropdown-menu">
+              <a href="#" class="lang-option" data-lang="ar">
+                <span class="lang-flag">🇸🇦</span>
+                <span>العربية</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="en">
+                <span class="lang-flag">🇺🇸</span>
+                <span>English</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="fr">
+                <span class="lang-flag">🇫🇷</span>
+                <span>Français</span>
+              </a>
+              <a href="#" class="lang-option" data-lang="tr">
+                <span class="lang-flag">🇹🇷</span>
+                <span>Türkçe</span>
+              </a>
+            </div>
+          </div>
+          
+          <a href="form.html" class="cta-btn" data-key="getStartedButton">Get Started</a>
+        </div>
+        
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+
+
+  <!-- Pricing Intro -->
+  <section class="pricing-intro">
+    <div class="container">
+      <h1 data-key="pricingTitle">Simple, Transparent Pricing</h1>
+      <p data-key="pricingSubtitle">Start for free and scale as you grow. No hidden fees, no surprises.</p>
+      
+      <div class="pricing-tabs">
+        <button class="tab-btn active" data-key="monthlyTab">Monthly</button>
+        <button class="tab-btn" data-key="yearlyTab">Yearly (Save 20%)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Plans -->
+  <div class="container">
+    <div class="pricing-grid">
+      <!-- Starter Plan -->
+      <div class="pricing-card">
+        <h3 data-key="starterPlan">Starter</h3>
+        <div class="price">$0<span data-key="perMonth">/month</span></div>
+        <p data-key="starterDesc">Perfect for testing the platform</p>
+        <ul class="features-list">
+          <li><i class="fas fa-check"></i> <span data-key="feature1">10 products</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature2">Basic design templates</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature3">Email support</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature4">Basic analytics</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature5">2.9% + $0.30 transaction fee</span></li>
+        </ul>
+        <a href="Payment .html" class="pricing-btn" data-key="getStartedFree">Get Started Free</a>
+      </div>
+      
+      <!-- Professional Plan (Most Popular) -->
+      <div class="pricing-card popular">
+        <div class="popular-badge" data-key="popularBadge">Most Popular</div>
+        <h3 data-key="proPlan">Professional</h3>
+        <div class="price">$29<span data-key="perMonth">/month</span></div>
+        <p data-key="proDesc">For growing businesses</p>
+        <ul class="features-list">
+          <li><i class="fas fa-check"></i> <span data-key="feature6">500 products</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature7">Premium templates</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature8">Priority support</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature9">Advanced analytics</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature10">2.5% transaction fee</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature11">5 staff accounts</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature12">AI product descriptions</span></li>
+        </ul>
+        <a href="Payment .html" class="pricing-btn" data-key="startTrial">Start 14-Day Trial</a>
+      </div>
+      
+      <!-- Enterprise Plan -->
+      <div class="pricing-card">
+        <h3 data-key="enterprisePlan">Enterprise</h3>
+        <div class="price">$99<span data-key="perMonth">/month</span></div>
+        <p data-key="enterpriseDesc">For high-volume businesses</p>
+        <ul class="features-list">
+          <li><i class="fas fa-check"></i> <span data-key="feature13">Unlimited products</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature14">Custom design</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature15">24/7 dedicated support</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature16">Premium analytics</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature17">1.9% transaction fee</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature18">20 staff accounts</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature19">Full AI tools access</span></li>
+          <li><i class="fas fa-check"></i> <span data-key="feature20">API access</span></li>
+        </ul>
+        <a href="Payment .html" class="pricing-btn" data-key="contactSales">Contact Sales</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Section -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title" data-key="faqTitle">Frequently Asked Questions</h2>
+      
+      <div class="faq-container">
+        <!-- FAQ Item 1 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span data-key="faq1">What payment methods do you accept?</span>
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </div>
+          <div class="faq-answer">
+            <p data-key="faqAnswer1">We accept all major credit cards (Visa, MasterCard, American Express), PayPal, and bank transfers. For enterprise plans, we also accept wire transfers.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 2 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span data-key="faq2">Can I switch plans later?</span>
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </div>
+          <div class="faq-answer">
+            <p data-key="faqAnswer2">Yes, you can upgrade or downgrade your plan at any time. Your billing will be prorated based on your usage.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 3 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span data-key="faq3">Is there a contract or long-term commitment?</span>
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </div>
+          <div class="faq-answer">
+            <p data-key="faqAnswer3">No, all plans are month-to-month with no long-term commitment. You can cancel anytime with no penalties.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 4 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span data-key="faq4">Do you offer discounts for non-profits?</span>
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </div>
+          <div class="faq-answer">
+            <p data-key="faqAnswer4">Yes, we offer special pricing for registered non-profit organizations. Please contact our sales team with proof of your non-profit status.</p>
+          </div>
+        </div>
+        
+        <!-- FAQ Item 5 -->
+        <div class="faq-item">
+          <div class="faq-question">
+            <span data-key="faq5">What happens if I exceed my product limit?</span>
+            <i class="fas fa-chevron-down faq-toggle"></i>
+          </div>
+          <div class="faq-answer">
+            <p data-key="faqAnswer5">If you exceed your product limit, you won't be able to add more products until you upgrade your plan. We'll notify you when you're approaching your limit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <h2 data-key="ctaTitle">Ready to Start Selling Online?</h2>
+      <p data-key="ctaDesc">Join thousands of successful businesses already using Vendoora</p>
+      <a href="form.html" class="cta-button" data-key="ctaButton">
+        <i class="fas fa-rocket"></i>
+        <span data-key="ctaButtonText">Create Your Store Now - It's Free!</span>
+      </a>
+      <p class="cta-note" data-key="ctaNote">No credit card required • Free plan available • Cancel anytime</p>
+    </div>
+  </section>
+  <br>
+ 
+  <!-- Footer -->
+  <footer>
+    <!-- Animated Background -->
+    <div class="footer-bg-animation">
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+      <div class="floating-shape"></div>
+    </div>
+
+    <div class="footer-content">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Company Section -->
+          <div class="footer-company">
+            <div class="company-header">
+              <div class="logo-container">
+                <div class="logo-icon" data-key="footerLogoIcon">V</div>
+              </div>
+              <a href="index.html" class="company-name" data-key="footerCompanyName">Vendoora</a>
+            </div>
+            <p class="company-description" data-key="footerAbout">
+              Vendoora wants you to spend less time staring at a screen and use more of your time growing your business. Create your online store in minutes with powerful AI tools and seamless integrations.
+            </p>
+            <div class="social-links">
+              <a href="#" class="social-link" aria-label="Facebook" data-key="socialFacebook">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Twitter" data-key="socialTwitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram" data-key="socialInstagram">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="LinkedIn" data-key="socialLinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="YouTube" data-key="socialYouTube">
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Company Links -->
+          <div class="footer-column">
+            <h4 data-key="footerCompany">Company</h4>
+            <ul class="footer-links">
+              <li><a href="index.html" data-key="footerHome">Home Page</a></li>
+              <li><a href="About us.html" data-key="footerAboutUs">About Us</a></li>
+              <li><a href="Online Store Builder.html" data-key="footerEcommerce">E-commerce</a></li>
+              <li><a href="Pricing.html" data-key="footerPricing">Pricing</a></li>
+              <li><a href="Blog.html" data-key="footerBlog">Blog</a></li>
+            </ul>
+          </div>
+
+          <!-- Support Links -->
+          <div class="footer-column">
+            <h4 data-key="footerSupport">Support</h4>
+            <ul class="footer-links">
+              <li><a href="#" data-key="footerCareer">Career</a></li>
+              <li><a href="#" data-key="footerAffiliates">Affiliates</a></li>
+              <li><a href="#" data-key="footerFAQ">FAQ</a></li>
+              <li><a href="#" data-key="footerTerms">Terms</a></li>
+              <li><a href="#" data-key="footerSecurity">Security</a></li>
+            </ul>
+          </div>
+
+          <!-- Resources Links -->
+          <div class="footer-column">
+            <h4 data-key="footerResources">Resources</h4>
+            <ul class="footer-links">
+              <li><a href="Blog.html" data-key="footerBlog2">Blog</a></li>
+              <li><a href="#" data-key="footerHelpCenter">Help Center</a></li>
+              <li><a href="#" data-key="footerMadeWith">Made with Vendoora</a></li>
+              <li><a href="#" data-key="footerTutorials">Tutorials</a></li>
+              <li><a href="#" data-key="footerAPIDocs">API Docs</a></li>
+            </ul>
+          </div>
+
+          <!-- Contact & Newsletter -->
+          <div class="footer-column">
+            <div class="newsletter-section">
+              <h4 data-key="footerContact">Contact Info</h4>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <span data-key="footerAddress">Lahore, Punjab, Pakistan</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <span data-key="footerEmail">info@vendoora.com</span>
+              </div>
+              
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <span data-key="footerPhone">+92 300 1234567</span>
+              </div>
+
+              <h4 style="margin-top: 2rem;" data-key="footerNewsletter">Newsletter</h4>
+              <p class="newsletter-description" data-key="footerNewsletterDesc">
+                Subscribe to our newsletter for the latest updates and special offers.
+              </p>
+              <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                <input type="email" class="newsletter-input" placeholder="Your email address" required data-key="footerNewsletterInput">
+                <button type="submit" class="newsletter-btn" aria-label="Subscribe" data-key="footerNewsletterBtn">
+                  <i class="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p data-key="footerCopyright">Copyright © Vendoora 2025 - All Rights Reserved</p>
+          <p data-key="footerCredit">Coding with <i class="fas fa-heart heart"></i> by <span class="designer" data-key="footerDesigner">Zouraiz</span></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+   
+    <script src="js/menu.js"></script>
+  <script src="js/lang-switcher.js"></script>
+  <script src="js/script.js"></script>
+  
+  <script>
+
+  // FAQ Toggle Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                item.classList.toggle('active');
+            });
+        });
+
+        // Pricing Tabs Functionality
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('nav');
+            const toggle = document.querySelector('.menu-toggle i');
+            
+            nav.classList.toggle('active');
+            
+            if (nav.classList.contains('active')) {
+                toggle.classList.remove('fa-bars');
+                toggle.classList.add('fa-times');
+            } else {
+                toggle.classList.remove('fa-times');
+                toggle.classList.add('fa-bars');
+            }
+        }
+
+
+
+    // Language Switcher Functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const langBtn = document.getElementById('langBtn');
+  const langDropdown = document.getElementById('langDropdown');
+  const currentLang = document.getElementById('currentLang');
+  const langOptions = document.querySelectorAll('.lang-option');
+  
+  // Toggle dropdown visibility
+  function toggleDropdown() {
+    langDropdown.classList.toggle('active');
+  }
+  
+  // Close dropdown
+  function closeDropdown() {
+    langDropdown.classList.remove('active');
+  }
+  
+  // Handle language selection
+  function selectLanguage(e) {
+    e.preventDefault();
+    const lang = this.getAttribute('data-lang');
+    const langText = this.querySelector('span:last-child').textContent;
+    
+    // Update current language display
+    currentLang.textContent = lang.toUpperCase();
+    closeDropdown();
+    
+    // Here you would implement actual language switching
+    console.log(`Language changed to ${langText}`);
+    
+    // Example: You could redirect to a language-specific page
+    // window.location.href = `?lang=${lang}`;
+    
+    // Or use a frontend i18n solution
+    // i18n.changeLanguage(lang);
+  }
+  
+  // Event listeners
+  langBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleDropdown();
+  });
+  
+  langOptions.forEach(option => {
+    option.addEventListener('click', selectLanguage);
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!langDropdown.contains(e.target) && e.target !== langBtn) {
+      closeDropdown();
+    }
+  });
+  
+  // Close dropdown when pressing Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeDropdown();
+    }
+  });
+  
+  // Close dropdown when scrolling (optional)
+  window.addEventListener('scroll', function() {
+    closeDropdown();
+  });
+});
+  </script>
+</body>
+</html>
